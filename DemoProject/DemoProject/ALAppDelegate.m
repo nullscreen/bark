@@ -8,12 +8,13 @@
 
 #import "ALAppDelegate.h"
 #import "ALRootViewController.h"
+#import "ALWindow.h"
 
 @implementation ALAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[ALWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     ALRootViewController *rootViewController = [[ALRootViewController alloc] init];
     self.window.rootViewController = rootViewController;
