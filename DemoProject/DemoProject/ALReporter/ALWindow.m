@@ -24,7 +24,6 @@
     return YES;
 }
 
-
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if (motion == UIEventSubtypeMotionShake) {
