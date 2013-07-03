@@ -21,6 +21,7 @@
 		89F292D91784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292E11784C5D3009DD393 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89F292DF1784C5D3009DD393 /* InfoPlist.strings */; };
 		89F292E41784C5D3009DD393 /* DemoProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292E31784C5D3009DD393 /* DemoProjectTests.m */; };
+		89F292EF1784C8ED009DD393 /* ALRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292EE1784C8ED009DD393 /* ALRootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		89F292E01784C5D3009DD393 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89F292E21784C5D3009DD393 /* DemoProjectTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoProjectTests.h; sourceTree = "<group>"; };
 		89F292E31784C5D3009DD393 /* DemoProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoProjectTests.m; sourceTree = "<group>"; };
+		89F292ED1784C8ED009DD393 /* ALRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALRootViewController.h; sourceTree = "<group>"; };
+		89F292EE1784C8ED009DD393 /* ALRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALRootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 			children = (
 				89F292C71784C5D3009DD393 /* ALAppDelegate.h */,
 				89F292C81784C5D3009DD393 /* ALAppDelegate.m */,
+				89F292ED1784C8ED009DD393 /* ALRootViewController.h */,
+				89F292EE1784C8ED009DD393 /* ALRootViewController.m */,
 				89F292BF1784C5D3009DD393 /* Supporting Files */,
 			);
 			path = DemoProject;
@@ -264,6 +269,7 @@
 			files = (
 				89F292C51784C5D3009DD393 /* main.m in Sources */,
 				89F292C91784C5D3009DD393 /* ALAppDelegate.m in Sources */,
+				89F292EF1784C8ED009DD393 /* ALRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

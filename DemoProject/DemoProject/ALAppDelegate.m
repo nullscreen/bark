@@ -7,6 +7,7 @@
 //
 
 #import "ALAppDelegate.h"
+#import "ALRootViewController.h"
 
 @implementation ALAppDelegate
 
@@ -14,6 +15,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    ALRootViewController *rootViewController = [[ALRootViewController alloc] init];
+    self.window.rootViewController = rootViewController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
