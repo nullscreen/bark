@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ALWindow : UIWindow
+@interface ALWindow : UIWindow <UIActionSheetDelegate>
 
 @end
