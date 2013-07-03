@@ -31,7 +31,7 @@
                                                                  delegate:self
                                                         cancelButtonTitle:@"Cancel"
                                                    destructiveButtonTitle:nil
-                                                        otherButtonTitles:@"Report an issue", nil];
+                                                        otherButtonTitles:@"Create a GitHub issue", @"Send an email", nil];
         [actionSheet showInView:self];
     }
 }
@@ -42,6 +42,8 @@
 {
     if(buttonIndex == 0) {
         NSLog(@"here");
+    } else if (buttonIndex == 1) {
+        
     }
     
 }
