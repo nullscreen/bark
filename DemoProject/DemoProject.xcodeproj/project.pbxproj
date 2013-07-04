@@ -23,6 +23,7 @@
 		89F292E41784C5D3009DD393 /* DemoProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292E31784C5D3009DD393 /* DemoProjectTests.m */; };
 		89F292EF1784C8ED009DD393 /* ALRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292EE1784C8ED009DD393 /* ALRootViewController.m */; };
 		89F292F31784DFD2009DD393 /* ALWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292F21784DFD2009DD393 /* ALWindow.m */; };
+		89F292F51784EC33009DD393 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292F41784EC33009DD393 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		89F292EE1784C8ED009DD393 /* ALRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALRootViewController.m; sourceTree = "<group>"; };
 		89F292F11784DFD2009DD393 /* ALWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALWindow.h; sourceTree = "<group>"; };
 		89F292F21784DFD2009DD393 /* ALWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALWindow.m; sourceTree = "<group>"; };
+		89F292F41784EC33009DD393 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89F292F51784EC33009DD393 /* MessageUI.framework in Frameworks */,
 				89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */,
 				89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */,
 				89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */,
@@ -107,6 +110,7 @@
 		89F292B71784C5D3009DD393 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89F292F41784EC33009DD393 /* MessageUI.framework */,
 				89F292B81784C5D3009DD393 /* UIKit.framework */,
 				89F292BA1784C5D3009DD393 /* Foundation.framework */,
 				89F292BC1784C5D3009DD393 /* CoreGraphics.framework */,

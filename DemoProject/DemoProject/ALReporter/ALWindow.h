@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface ALWindow : UIWindow <UIActionSheetDelegate>
-
+@interface ALWindow : UIWindow <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@property (nonatomic, strong) NSArray *emailRecipients;
+@property (nonatomic, strong) NSString *emailSubject;
 @end
