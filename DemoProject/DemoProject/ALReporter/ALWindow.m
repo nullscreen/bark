@@ -34,7 +34,7 @@
                                                                  delegate:self
                                                         cancelButtonTitle:@"Cancel"
                                                    destructiveButtonTitle:nil
-                                                        otherButtonTitles:@"Report Bug", nil];
+                                                        otherButtonTitles:@"Send Email", @"Create GitHub Issue", nil];
         [actionSheet showInView:self];
     }
 }
@@ -45,7 +45,9 @@
 {
     if(buttonIndex == 0) {
         [self showEmailView];
-    }    
+    } else if (buttonIndex == 1) {
+        
+    }
 }
 
 #pragma mark - MFMailComposer
