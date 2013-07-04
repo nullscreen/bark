@@ -11,12 +11,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ALWindow
-@synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients;
+@synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody, attachScreenshot = _attachScreenshot;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _attachScreenshot = YES;
     }
     return self;
 }
@@ -65,17 +66,19 @@
         NSString *iosVersion = [UIDevice currentDevice].systemVersion;
         NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
         NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-        NSString *messageBody = [NSString stringWithFormat:@"iOS Version: %@\nApp Version: %@\nBuild: %@", iosVersion,appVersion,build];
-        [mailer setMessageBody:messageBody isHTML:NO];
+        NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nApp Version: %@\nBuild: %@", iosVersion,appVersion,build];
+        [mailer setMessageBody:_emailBody ? _emailBody : defaultBody isHTML:NO];
         
         // take screen shot - note, this will not capture OpenGL ES elements
-        UIGraphicsBeginImageContext(self.bounds.size);
-        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        NSData *data = UIImagePNGRepresentation(image);
+        if(_attachScreenshot) {
+            UIGraphicsBeginImageContext(self.bounds.size);
+            [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            NSData *data = UIImagePNGRepresentation(image);
+            [mailer addAttachmentData:data mimeType:@"image/png" fileName:@"screenshot"];
+        }
         
-        [mailer addAttachmentData:data mimeType:@"image/png" fileName:@"screenshot"];
         [self.rootViewController presentViewController:mailer animated:YES completion:nil];
     }
     else {
