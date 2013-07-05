@@ -24,6 +24,18 @@
 		89F292EF1784C8ED009DD393 /* ALRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292EE1784C8ED009DD393 /* ALRootViewController.m */; };
 		89F292F31784DFD2009DD393 /* ALWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292F21784DFD2009DD393 /* ALWindow.m */; };
 		89F292F51784EC33009DD393 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292F41784EC33009DD393 /* MessageUI.framework */; };
+		89F29311178680E2009DD393 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89F292F8178680E2009DD393 /* InfoPlist.strings */; };
+		89F29312178680E2009DD393 /* NSArray+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292FB178680E2009DD393 /* NSArray+Utilities.m */; };
+		89F29313178680E2009DD393 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292FD178680E2009DD393 /* NSData+Base64.m */; };
+		89F29314178680E2009DD393 /* NSInvocation+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292FF178680E2009DD393 /* NSInvocation+Blocks.m */; };
+		89F29315178680E2009DD393 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F29301178680E2009DD393 /* NSString+UAGithubEngineUtilities.m */; };
+		89F29316178680E2009DD393 /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F29303178680E2009DD393 /* NSString+UUID.m */; };
+		89F29317178680E2009DD393 /* UAGithubEngine-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89F29304178680E2009DD393 /* UAGithubEngine-Info.plist */; };
+		89F29318178680E2009DD393 /* UAGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F29307178680E2009DD393 /* UAGithubEngine.m */; };
+		89F29319178680E2009DD393 /* UAGithubEngineConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F29309178680E2009DD393 /* UAGithubEngineConstants.m */; };
+		89F2931A178680E2009DD393 /* UAGithubJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2930C178680E2009DD393 /* UAGithubJSONParser.m */; };
+		89F2931B178680E2009DD393 /* UAGithubURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2930E178680E2009DD393 /* UAGithubURLConnection.m */; };
+		89F2931C178680E2009DD393 /* UAReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F29310178680E2009DD393 /* UAReachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +73,30 @@
 		89F292F11784DFD2009DD393 /* ALWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALWindow.h; sourceTree = "<group>"; };
 		89F292F21784DFD2009DD393 /* ALWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALWindow.m; sourceTree = "<group>"; };
 		89F292F41784EC33009DD393 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		89F292F9178680E2009DD393 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		89F292FA178680E2009DD393 /* NSArray+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Utilities.h"; sourceTree = "<group>"; };
+		89F292FB178680E2009DD393 /* NSArray+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Utilities.m"; sourceTree = "<group>"; };
+		89F292FC178680E2009DD393 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		89F292FD178680E2009DD393 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		89F292FE178680E2009DD393 /* NSInvocation+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Blocks.h"; sourceTree = "<group>"; };
+		89F292FF178680E2009DD393 /* NSInvocation+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Blocks.m"; sourceTree = "<group>"; };
+		89F29300178680E2009DD393 /* NSString+UAGithubEngineUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UAGithubEngineUtilities.h"; sourceTree = "<group>"; };
+		89F29301178680E2009DD393 /* NSString+UAGithubEngineUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UAGithubEngineUtilities.m"; sourceTree = "<group>"; };
+		89F29302178680E2009DD393 /* NSString+UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUID.h"; sourceTree = "<group>"; };
+		89F29303178680E2009DD393 /* NSString+UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUID.m"; sourceTree = "<group>"; };
+		89F29304178680E2009DD393 /* UAGithubEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UAGithubEngine-Info.plist"; sourceTree = "<group>"; };
+		89F29305178680E2009DD393 /* UAGithubEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UAGithubEngine-Prefix.pch"; sourceTree = "<group>"; };
+		89F29306178680E2009DD393 /* UAGithubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngine.h; sourceTree = "<group>"; };
+		89F29307178680E2009DD393 /* UAGithubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubEngine.m; sourceTree = "<group>"; };
+		89F29308178680E2009DD393 /* UAGithubEngineConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineConstants.h; sourceTree = "<group>"; };
+		89F29309178680E2009DD393 /* UAGithubEngineConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubEngineConstants.m; sourceTree = "<group>"; };
+		89F2930A178680E2009DD393 /* UAGithubEngineRequestTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineRequestTypes.h; sourceTree = "<group>"; };
+		89F2930B178680E2009DD393 /* UAGithubJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubJSONParser.h; sourceTree = "<group>"; };
+		89F2930C178680E2009DD393 /* UAGithubJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubJSONParser.m; sourceTree = "<group>"; };
+		89F2930D178680E2009DD393 /* UAGithubURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubURLConnection.h; sourceTree = "<group>"; };
+		89F2930E178680E2009DD393 /* UAGithubURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubURLConnection.m; sourceTree = "<group>"; };
+		89F2930F178680E2009DD393 /* UAReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAReachability.h; sourceTree = "<group>"; };
+		89F29310178680E2009DD393 /* UAReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAReachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,10 +204,42 @@
 		89F292F01784CB1E009DD393 /* ALReporter */ = {
 			isa = PBXGroup;
 			children = (
+				89F292F7178680E2009DD393 /* UAGitHubEngine */,
 				89F292F11784DFD2009DD393 /* ALWindow.h */,
 				89F292F21784DFD2009DD393 /* ALWindow.m */,
 			);
 			path = ALReporter;
+			sourceTree = "<group>";
+		};
+		89F292F7178680E2009DD393 /* UAGitHubEngine */ = {
+			isa = PBXGroup;
+			children = (
+				89F292F8178680E2009DD393 /* InfoPlist.strings */,
+				89F292FA178680E2009DD393 /* NSArray+Utilities.h */,
+				89F292FB178680E2009DD393 /* NSArray+Utilities.m */,
+				89F292FC178680E2009DD393 /* NSData+Base64.h */,
+				89F292FD178680E2009DD393 /* NSData+Base64.m */,
+				89F292FE178680E2009DD393 /* NSInvocation+Blocks.h */,
+				89F292FF178680E2009DD393 /* NSInvocation+Blocks.m */,
+				89F29300178680E2009DD393 /* NSString+UAGithubEngineUtilities.h */,
+				89F29301178680E2009DD393 /* NSString+UAGithubEngineUtilities.m */,
+				89F29302178680E2009DD393 /* NSString+UUID.h */,
+				89F29303178680E2009DD393 /* NSString+UUID.m */,
+				89F29304178680E2009DD393 /* UAGithubEngine-Info.plist */,
+				89F29305178680E2009DD393 /* UAGithubEngine-Prefix.pch */,
+				89F29306178680E2009DD393 /* UAGithubEngine.h */,
+				89F29307178680E2009DD393 /* UAGithubEngine.m */,
+				89F29308178680E2009DD393 /* UAGithubEngineConstants.h */,
+				89F29309178680E2009DD393 /* UAGithubEngineConstants.m */,
+				89F2930A178680E2009DD393 /* UAGithubEngineRequestTypes.h */,
+				89F2930B178680E2009DD393 /* UAGithubJSONParser.h */,
+				89F2930C178680E2009DD393 /* UAGithubJSONParser.m */,
+				89F2930D178680E2009DD393 /* UAGithubURLConnection.h */,
+				89F2930E178680E2009DD393 /* UAGithubURLConnection.m */,
+				89F2930F178680E2009DD393 /* UAReachability.h */,
+				89F29310178680E2009DD393 /* UAReachability.m */,
+			);
+			path = UAGitHubEngine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +318,8 @@
 				89F292CB1784C5D3009DD393 /* Default.png in Resources */,
 				89F292CD1784C5D3009DD393 /* Default@2x.png in Resources */,
 				89F292CF1784C5D3009DD393 /* Default-568h@2x.png in Resources */,
+				89F29311178680E2009DD393 /* InfoPlist.strings in Resources */,
+				89F29317178680E2009DD393 /* UAGithubEngine-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +358,16 @@
 				89F292C91784C5D3009DD393 /* ALAppDelegate.m in Sources */,
 				89F292EF1784C8ED009DD393 /* ALRootViewController.m in Sources */,
 				89F292F31784DFD2009DD393 /* ALWindow.m in Sources */,
+				89F29312178680E2009DD393 /* NSArray+Utilities.m in Sources */,
+				89F29313178680E2009DD393 /* NSData+Base64.m in Sources */,
+				89F29314178680E2009DD393 /* NSInvocation+Blocks.m in Sources */,
+				89F29315178680E2009DD393 /* NSString+UAGithubEngineUtilities.m in Sources */,
+				89F29316178680E2009DD393 /* NSString+UUID.m in Sources */,
+				89F29318178680E2009DD393 /* UAGithubEngine.m in Sources */,
+				89F29319178680E2009DD393 /* UAGithubEngineConstants.m in Sources */,
+				89F2931A178680E2009DD393 /* UAGithubJSONParser.m in Sources */,
+				89F2931B178680E2009DD393 /* UAGithubURLConnection.m in Sources */,
+				89F2931C178680E2009DD393 /* UAReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +402,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				89F292E01784C5D3009DD393 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		89F292F8178680E2009DD393 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89F292F9178680E2009DD393 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -462,6 +550,7 @@
 				89F292E91784C5D3009DD393 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		89F292EA1784C5D3009DD393 /* Build configuration list for PBXNativeTarget "DemoProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +559,7 @@
 				89F292EC1784C5D3009DD393 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
