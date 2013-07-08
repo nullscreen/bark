@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89260E56178B80B000BE15EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89260E55178B80B000BE15EA /* SystemConfiguration.framework */; };
 		89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292B81784C5D3009DD393 /* UIKit.framework */; };
 		89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BC1784C5D3009DD393 /* CoreGraphics.framework */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		89260E55178B80B000BE15EA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		89F292B51784C5D3009DD393 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F292B81784C5D3009DD393 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		89F292BA1784C5D3009DD393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89260E56178B80B000BE15EA /* SystemConfiguration.framework in Frameworks */,
 				89F292F51784EC33009DD393 /* MessageUI.framework in Frameworks */,
 				89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */,
 				89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */,
@@ -146,6 +149,7 @@
 		89F292B71784C5D3009DD393 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89260E55178B80B000BE15EA /* SystemConfiguration.framework */,
 				89F292F41784EC33009DD393 /* MessageUI.framework */,
 				89F292B81784C5D3009DD393 /* UIKit.framework */,
 				89F292BA1784C5D3009DD393 /* Foundation.framework */,

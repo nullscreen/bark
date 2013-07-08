@@ -9,6 +9,7 @@
 #import "ALWindow.h"
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
+#import "UAGithubEngine.h"
 
 @implementation ALWindow
 @synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody, attachScreenshot = _attachScreenshot;
@@ -46,6 +47,12 @@
     if(buttonIndex == 0) {
         [self showEmailView];
     } else if (buttonIndex == 1) {
+        UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
+        [engine repositoriesWithSuccess:^(id response) {
+            NSLog(@"Got an array of repos: %@", response);
+        } failure:^(NSError *error) {
+            NSLog(@"Oops: %@", error);
+        }];
         
     }
 }
