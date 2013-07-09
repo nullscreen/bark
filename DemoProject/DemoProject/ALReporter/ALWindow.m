@@ -48,12 +48,18 @@
     if(buttonIndex == 0) {
         [self showEmailView];
     } else if (buttonIndex == 1) {
+        
         UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
+        
+        // check to make sure the repository exists
         [engine repositoriesWithSuccess:^(id response) {
-            NSLog(@"Got an array of repos: %@", response);
             NSArray *repositories = response;
             for (int i=0; i<repositories.count; i++) {
-                NSLog(@"title: %@", [[repositories objectAtIndex:i] objectForKey:@"name"]);
+                if([self.repositoryName isEqualToString:[[repositories objectAtIndex:i] objectForKey:@"name"]]) {
+                    NSLog(@"yes");
+                } else {
+                    NSLog(@"Repository %@ not found. Check to make sure it's been set correctly", self.repositoryName);
+                }
             }
         } failure:^(NSError *error) {
             NSLog(@"Oops: %@", error);
