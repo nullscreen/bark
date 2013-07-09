@@ -119,14 +119,14 @@
     [self.view addSubview:tagLabel];
     
     UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [createIssueButton setBackgroundColor:[UIColor colorWithRed:(89.0f/255.0f) green:(163.0f/255.0f) blue:(252.0f/255.0f) alpha:1.0f]];
-    createIssueButton.frame = CGRectMake(self.view.frame.size.width/2, 95.0f, self.view.frame.size.width/2, 50.0f);
+    [createIssueButton setBackgroundColor:[UIColor colorWithRed:(30.0f/255.0f) green:(71.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f]];
+    createIssueButton.frame = CGRectMake(0.0f, self.view.frame.size.height-50.0f, self.view.frame.size.width, 50.0f);
     createIssueButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     createIssueButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     createIssueButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
-    [createIssueButton setTitle:@"Tap to set\na milestone" forState:UIControlStateNormal];
+    [createIssueButton setTitle:@"Create Issue" forState:UIControlStateNormal];
     [createIssueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [createIssueButton addTarget:self action:@selector(createIssuePressed) forControlEvents:UIControlEventTouchUpInside];
+    [createIssueButton addTarget:self action:@selector(createIssuePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:createIssueButton];
     
     
@@ -149,8 +149,10 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)createIssuePressed
+- (void)createIssuePressed:(UIButton *)button
 {
+    self.view.userInteractionEnabled = NO;
+    [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
     
 }
 
