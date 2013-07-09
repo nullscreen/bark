@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ALIssueViewController : UIViewController
+@interface ALIssueViewController : UIViewController <UITextFieldDelegate>
 
 @end
