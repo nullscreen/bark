@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ALIssueViewController : UIViewController <UITextFieldDelegate>
-
+@property (nonatomic, strong) NSDictionary *repository;
 @end

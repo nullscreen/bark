@@ -58,6 +58,7 @@
             for (int i=0; i<repositories.count; i++) {
                 if([self.repositoryName isEqualToString:[[repositories objectAtIndex:i] objectForKey:@"name"]]) {
                     ALIssueViewController *issueView = [[ALIssueViewController alloc] init];
+                    issueView.repository = [repositories objectAtIndex:i];
                     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
                     [self.rootViewController presentViewController:navController animated:YES completion:nil];
                     

@@ -13,6 +13,7 @@
 @end
 
 @implementation ALIssueViewController
+@synthesize repository = _repository;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,18 +28,24 @@
 {
     [super viewDidLoad];
     self.title = @"Create an Issue";
-    //self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:50.0f/255.0f alpha:1.0];
     self.navigationController.navigationBar.hidden =  YES;
     self.view.backgroundColor = [UIColor colorWithWhite:(245.0f/255.0f) alpha:1.0f];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                                                 target:self
                                                                                                                 action:@selector(cancelPressed)];
+    [self setupUI];
+    NSLog(@"%@", [_repository objectForKey:@"name"]);
+
+
 
     
-    UILabel *createLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 30.0f)];
-    createLabel.text = @"Create an Issue";
-    createLabel.backgroundColor = [UIColor clearColor];
+}
+
+- (void)setupUI
+{
+    UILabel *createLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 235.0f, 30.0f)];
+    createLabel.text = [NSString stringWithFormat:@"New Issue (%@)", [_repository objectForKey:@"name"]];
+    createLabel.backgroundColor = [UIColor whiteColor];
     createLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     createLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
     [self.view addSubview:createLabel];
@@ -102,7 +109,6 @@
     tagLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     tagLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tagLabel];
-
     
 }
 
