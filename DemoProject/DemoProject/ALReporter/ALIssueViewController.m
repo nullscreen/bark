@@ -85,16 +85,23 @@
     [milestoneButton addTarget:self action:@selector(milestonePressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:milestoneButton];
     
-    UILabel *bodyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 160.0f, 200.0f, 30.0f)];
+    UILabel *bodyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 150.0f, 200.0f, 30.0f)];
     bodyLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
     bodyLabel.text = @"Leave a Comment";
     bodyLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     bodyLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:bodyLabel];
     
-    UITextView *bodyField = [[UITextView alloc] initWithFrame:CGRectMake(10.0f, 190.0f, self.view.frame.size.width-20.0f, 150.0f)];
+    UITextView *bodyField = [[UITextView alloc] initWithFrame:CGRectMake(10.0f, 180.0f, self.view.frame.size.width-20.0f, 150.0f)];
     bodyField.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bodyField];
+    
+    UILabel *tagLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 330.0f, 200.0f, 30.0f)];
+    tagLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
+    tagLabel.text = @"Add Tags";
+    tagLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
+    tagLabel.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:tagLabel];
 
     
 }
