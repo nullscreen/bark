@@ -7,6 +7,7 @@
 //
 
 #import "ALIssueViewController.h"
+#import "UAGithubEngine.h"
 
 @interface ALIssueViewController ()
 
@@ -33,6 +34,10 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                                                 target:self
                                                                                                                 action:@selector(cancelPressed)];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] init];
+    recognizer.delegate = self;
+    [self.view addGestureRecognizer:recognizer];
+    
     [self setupUI];
     NSLog(@"%@", [_repository objectForKey:@"name"]);
 
@@ -99,15 +104,11 @@
     [milestoneButton addTarget:self action:@selector(milestonePressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:milestoneButton];
     
-    UILabel *bodyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 150.0f, 200.0f, 30.0f)];
-    bodyLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
-    bodyLabel.text = @"Leave a Comment";
-    bodyLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
-    bodyLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:bodyLabel];
-    
-    UITextView *bodyField = [[UITextView alloc] initWithFrame:CGRectMake(10.0f, 180.0f, self.view.frame.size.width-20.0f, 150.0f)];
+    UITextView *bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 150.0f)];
+    bodyField.delegate = self;
+    bodyField.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     bodyField.backgroundColor = [UIColor whiteColor];
+    bodyField.text = @"Leave a comment...";
     [self.view addSubview:bodyField];
     
     UILabel *tagLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 330.0f, 200.0f, 30.0f)];
@@ -116,6 +117,18 @@
     tagLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     tagLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tagLabel];
+    
+    UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [createIssueButton setBackgroundColor:[UIColor colorWithRed:(89.0f/255.0f) green:(163.0f/255.0f) blue:(252.0f/255.0f) alpha:1.0f]];
+    createIssueButton.frame = CGRectMake(self.view.frame.size.width/2, 95.0f, self.view.frame.size.width/2, 50.0f);
+    createIssueButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    createIssueButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    createIssueButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
+    [createIssueButton setTitle:@"Tap to set\na milestone" forState:UIControlStateNormal];
+    [createIssueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [createIssueButton addTarget:self action:@selector(createIssuePressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:createIssueButton];
+    
     
 }
 
@@ -136,6 +149,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)createIssuePressed
+{
+    
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -152,6 +171,33 @@
     }
 }
 
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if([textView.text isEqualToString:@"Leave a comment..."]) {
+        textView.text = @"";
+    }
+    
+}
+
+#pragma mark = UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    [self dismissKeyboard];
+    return YES;
+}
+
+- (void)dismissKeyboard
+{
+    for(UIView* view in [self.view subviews]) {
+        if([view isKindOfClass:[UITextField class]] && [view isFirstResponder]) {
+            [view resignFirstResponder];
+        } else if ([view isKindOfClass:[UITextView class]] && [view isFirstResponder]) {
+            [view resignFirstResponder];
+        }
+    }
+}
 
 @end
 

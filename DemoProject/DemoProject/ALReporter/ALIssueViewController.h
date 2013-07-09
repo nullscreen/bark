@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ALIssueViewController : UIViewController <UITextFieldDelegate>
+@interface ALIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) NSDictionary *repository;
 @end
