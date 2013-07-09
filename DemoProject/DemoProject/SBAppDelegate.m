@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Austin Louden. All rights reserved.
 //
 
-#import "ALAppDelegate.h"
-#import "ALRootViewController.h"
+#import "SBAppDelegate.h"
+#import "SBRootViewController.h"
 #import "ALWindow.h"
 
-@implementation ALAppDelegate
+@implementation SBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -19,7 +19,7 @@
     
     self.window = window;
     // Override point for customization after application launch.
-    ALRootViewController *rootViewController = [[ALRootViewController alloc] init];
+    SBRootViewController *rootViewController = [[SBRootViewController alloc] init];
     self.window.rootViewController = rootViewController;
     
     self.window.backgroundColor = [UIColor whiteColor];

@@ -14,7 +14,7 @@
 		89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BC1784C5D3009DD393 /* CoreGraphics.framework */; };
 		89F292C31784C5D3009DD393 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89F292C11784C5D3009DD393 /* InfoPlist.strings */; };
 		89F292C51784C5D3009DD393 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292C41784C5D3009DD393 /* main.m */; };
-		89F292C91784C5D3009DD393 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292C81784C5D3009DD393 /* ALAppDelegate.m */; };
+		89F292C91784C5D3009DD393 /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292C81784C5D3009DD393 /* SBAppDelegate.m */; };
 		89F292CB1784C5D3009DD393 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F292CA1784C5D3009DD393 /* Default.png */; };
 		89F292CD1784C5D3009DD393 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F292CC1784C5D3009DD393 /* Default@2x.png */; };
 		89F292CF1784C5D3009DD393 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F292CE1784C5D3009DD393 /* Default-568h@2x.png */; };
@@ -23,7 +23,7 @@
 		89F292D91784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292E11784C5D3009DD393 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89F292DF1784C5D3009DD393 /* InfoPlist.strings */; };
 		89F292E41784C5D3009DD393 /* DemoProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292E31784C5D3009DD393 /* DemoProjectTests.m */; };
-		89F292EF1784C8ED009DD393 /* ALRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292EE1784C8ED009DD393 /* ALRootViewController.m */; };
+		89F292EF1784C8ED009DD393 /* SBRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292EE1784C8ED009DD393 /* SBRootViewController.m */; };
 		89F292F31784DFD2009DD393 /* ALWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292F21784DFD2009DD393 /* ALWindow.m */; };
 		89F292F51784EC33009DD393 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292F41784EC33009DD393 /* MessageUI.framework */; };
 		89F29311178680E2009DD393 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89F292F8178680E2009DD393 /* InfoPlist.strings */; };
@@ -62,8 +62,8 @@
 		89F292C21784C5D3009DD393 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89F292C41784C5D3009DD393 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		89F292C61784C5D3009DD393 /* DemoProject-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DemoProject-Prefix.pch"; sourceTree = "<group>"; };
-		89F292C71784C5D3009DD393 /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
-		89F292C81784C5D3009DD393 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		89F292C71784C5D3009DD393 /* SBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBAppDelegate.h; sourceTree = "<group>"; };
+		89F292C81784C5D3009DD393 /* SBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
 		89F292CA1784C5D3009DD393 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		89F292CC1784C5D3009DD393 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		89F292CE1784C5D3009DD393 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 		89F292E01784C5D3009DD393 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89F292E21784C5D3009DD393 /* DemoProjectTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoProjectTests.h; sourceTree = "<group>"; };
 		89F292E31784C5D3009DD393 /* DemoProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoProjectTests.m; sourceTree = "<group>"; };
-		89F292ED1784C8ED009DD393 /* ALRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALRootViewController.h; sourceTree = "<group>"; };
-		89F292EE1784C8ED009DD393 /* ALRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALRootViewController.m; sourceTree = "<group>"; };
+		89F292ED1784C8ED009DD393 /* SBRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRootViewController.h; sourceTree = "<group>"; };
+		89F292EE1784C8ED009DD393 /* SBRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRootViewController.m; sourceTree = "<group>"; };
 		89F292F11784DFD2009DD393 /* ALWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALWindow.h; sourceTree = "<group>"; };
 		89F292F21784DFD2009DD393 /* ALWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALWindow.m; sourceTree = "<group>"; };
 		89F292F41784EC33009DD393 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -165,10 +165,10 @@
 		89F292BE1784C5D3009DD393 /* DemoProject */ = {
 			isa = PBXGroup;
 			children = (
-				89F292C71784C5D3009DD393 /* ALAppDelegate.h */,
-				89F292C81784C5D3009DD393 /* ALAppDelegate.m */,
-				89F292ED1784C8ED009DD393 /* ALRootViewController.h */,
-				89F292EE1784C8ED009DD393 /* ALRootViewController.m */,
+				89F292C71784C5D3009DD393 /* SBAppDelegate.h */,
+				89F292C81784C5D3009DD393 /* SBAppDelegate.m */,
+				89F292ED1784C8ED009DD393 /* SBRootViewController.h */,
+				89F292EE1784C8ED009DD393 /* SBRootViewController.m */,
 				89F292F01784CB1E009DD393 /* ALReporter */,
 				89F292BF1784C5D3009DD393 /* Supporting Files */,
 			);
@@ -364,8 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				89F292C51784C5D3009DD393 /* main.m in Sources */,
-				89F292C91784C5D3009DD393 /* ALAppDelegate.m in Sources */,
-				89F292EF1784C8ED009DD393 /* ALRootViewController.m in Sources */,
+				89F292C91784C5D3009DD393 /* SBAppDelegate.m in Sources */,
+				89F292EF1784C8ED009DD393 /* SBRootViewController.m in Sources */,
 				89F292F31784DFD2009DD393 /* ALWindow.m in Sources */,
 				89F29312178680E2009DD393 /* NSArray+Utilities.m in Sources */,
 				89F29313178680E2009DD393 /* NSData+Base64.m in Sources */,

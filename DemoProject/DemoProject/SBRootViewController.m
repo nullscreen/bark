@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Austin Louden. All rights reserved.
 //
 
-#import "ALRootViewController.h"
+#import "SBRootViewController.h"
 
-@interface ALRootViewController ()
+@interface SBRootViewController ()
 
 @end
 
-@implementation ALRootViewController
+@implementation SBRootViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
