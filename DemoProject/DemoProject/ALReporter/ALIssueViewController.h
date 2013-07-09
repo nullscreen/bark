@@ -10,4 +10,5 @@
 
 @interface ALIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) NSDictionary *repository;
+@property (nonatomic, strong) NSDictionary *issueDictionary;
 @end

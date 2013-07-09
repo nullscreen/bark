@@ -14,7 +14,7 @@
 @end
 
 @implementation ALIssueViewController
-@synthesize repository = _repository;
+@synthesize repository = _repository, issueDictionary = _issueDictionary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,10 +39,7 @@
     [self.view addGestureRecognizer:recognizer];
     
     [self setupUI];
-    NSLog(@"%@", [_repository objectForKey:@"name"]);
-
-
-
+    NSLog(@"%@", _repository);
     
 }
 
@@ -151,8 +148,31 @@
 
 - (void)createIssuePressed:(UIButton *)button
 {
+    //- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+    /*
+     {
+         "title": "Found a bug",
+         "body": "I'm having a problem with this.",
+         "assignee": "octocat",
+         "milestone": 1,
+         "labels": [
+         "Label1",
+         "Label2"
+         ]
+     }
+     */
+    
+    _issueDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Test Issue #1", @"title",
+                                                                    @"This is the body of the issue.", @"body",
+                                                                    @[@"test"],@"labels", nil];
     self.view.userInteractionEnabled = NO;
     [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
+    UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
+    [engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
+        [button setTitle:@"Success!" forState:UIControlStateNormal];
+    } failure:^(NSError *error) {
+        NSLog(@"error");
+    }];
     
 }
 
@@ -202,19 +222,3 @@
 }
 
 @end
-
-
-//- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
-
-/*
- {
- "title": "Found a bug",
- "body": "I'm having a problem with this.",
- "assignee": "octocat",
- "milestone": 1,
- "labels": [
- "Label1",
- "Label2"
- ]
- }
- */
