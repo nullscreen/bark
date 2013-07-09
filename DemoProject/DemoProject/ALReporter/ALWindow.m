@@ -12,7 +12,8 @@
 #import "UAGithubEngine.h"
 
 @implementation ALWindow
-@synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody, attachScreenshot = _attachScreenshot;
+@synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody,
+            attachScreenshot = _attachScreenshot, repositoryName = _repositoryName;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -50,6 +51,10 @@
         UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
         [engine repositoriesWithSuccess:^(id response) {
             NSLog(@"Got an array of repos: %@", response);
+            NSArray *repositories = response;
+            for (int i=0; i<repositories.count; i++) {
+                NSLog(@"title: %@", [[repositories objectAtIndex:i] objectForKey:@"name"]);
+            }
         } failure:^(NSError *error) {
             NSLog(@"Oops: %@", error);
         }];

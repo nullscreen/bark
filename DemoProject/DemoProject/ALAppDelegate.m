@@ -14,7 +14,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[ALWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    ALWindow *window = [[ALWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window.repositoryName = @"ALReporter";
+    
+    self.window = window;
     // Override point for customization after application launch.
     ALRootViewController *rootViewController = [[ALRootViewController alloc] init];
     self.window.rootViewController = rootViewController;

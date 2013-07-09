@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 @interface ALWindow : UIWindow <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@property (nonatomic, strong) NSString *repositoryName;
 @property (nonatomic, strong) NSArray *emailRecipients;
 @property (nonatomic, strong) NSString *emailSubject;
 @property (nonatomic, strong) NSString *emailBody;
