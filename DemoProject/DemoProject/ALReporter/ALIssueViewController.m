@@ -14,7 +14,7 @@
 @end
 
 @implementation ALIssueViewController
-@synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary, tags = _tags, asignees = _asignees;
+@synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary, labels = _labels, asignees = _asignees, milestones = _milestones;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +31,7 @@
     self.navigationController.navigationBar.hidden =  YES;
     self.view.backgroundColor = [UIColor colorWithWhite:(245.0f/255.0f) alpha:1.0f];
     [self setupUI];
-    [self getLabelsAndAssignees];
+    [self getRepoData];
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] init];
     recognizer.delegate = self;
@@ -123,14 +123,25 @@
     [self.view addSubview:createIssueButton];
 }
 
-- (void)getLabelsAndAssignees
+- (void)getRepoData
 {
     [_engine labelsForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
-        NSLog(@"%@", response);
+        _labels = response;
     } failure:^(NSError *error) {
         NSLog(@"Request failed with error %@", error);
     }];
     
+    [_engine assigneesForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
+        _asignees = response;
+    } failure:^(NSError *error) {
+        ;
+    }];
+    
+    [_engine milestonesForRepository:@"" success:^(id response) {
+        _milestones = response;
+    } failure:^(NSError *error) {
+        ;
+    }];
 }
 
 #pragma mark - Actions

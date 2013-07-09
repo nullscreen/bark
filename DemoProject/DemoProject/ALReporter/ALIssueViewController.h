@@ -12,7 +12,8 @@
 @interface ALIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UAGithubEngine *engine;
 @property (nonatomic, strong) NSDictionary *repository;
-@property (nonatomic, strong) NSArray *tags;
+@property (nonatomic, strong) NSArray *labels;
 @property (nonatomic, strong) NSArray *asignees;
+@property (nonatomic, strong) NSArray *milestones;
 @property (nonatomic, strong) NSMutableDictionary *issueDictionary;
 @end
