@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		89260E58178B986900BE15EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89260E57178B986900BE15EA /* SystemConfiguration.framework */; };
+		89260E5B178BAA7F00BE15EA /* ALIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89260E5A178BAA7F00BE15EA /* ALIssueViewController.m */; };
 		89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292B81784C5D3009DD393 /* UIKit.framework */; };
 		89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BC1784C5D3009DD393 /* CoreGraphics.framework */; };
@@ -51,6 +52,8 @@
 
 /* Begin PBXFileReference section */
 		89260E57178B986900BE15EA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		89260E59178BAA7F00BE15EA /* ALIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALIssueViewController.h; sourceTree = "<group>"; };
+		89260E5A178BAA7F00BE15EA /* ALIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALIssueViewController.m; sourceTree = "<group>"; };
 		89F292B51784C5D3009DD393 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F292B81784C5D3009DD393 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		89F292BA1784C5D3009DD393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -211,6 +214,8 @@
 				89F292F7178680E2009DD393 /* UAGitHubEngine */,
 				89F292F11784DFD2009DD393 /* ALWindow.h */,
 				89F292F21784DFD2009DD393 /* ALWindow.m */,
+				89260E59178BAA7F00BE15EA /* ALIssueViewController.h */,
+				89260E5A178BAA7F00BE15EA /* ALIssueViewController.m */,
 			);
 			path = ALReporter;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				89F2931A178680E2009DD393 /* UAGithubJSONParser.m in Sources */,
 				89F2931B178680E2009DD393 /* UAGithubURLConnection.m in Sources */,
 				89F2931C178680E2009DD393 /* UAReachability.m in Sources */,
+				89260E5B178BAA7F00BE15EA /* ALIssueViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

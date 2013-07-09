@@ -56,7 +56,25 @@
             NSArray *repositories = response;
             for (int i=0; i<repositories.count; i++) {
                 if([self.repositoryName isEqualToString:[[repositories objectAtIndex:i] objectForKey:@"name"]]) {
-                    NSLog(@"yes");
+                    
+                    // present the create issue view
+                    //- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+                    
+                    /*
+                     {
+                         "title": "Found a bug",
+                         "body": "I'm having a problem with this.",
+                         "assignee": "octocat",
+                         "milestone": 1,
+                         "labels": [
+                         "Label1",
+                         "Label2"
+                     ]
+                     }
+                     */
+                    
+                    
+                    
                 } else {
                     NSLog(@"Repository %@ not found. Check to make sure it's been set correctly", self.repositoryName);
                 }
