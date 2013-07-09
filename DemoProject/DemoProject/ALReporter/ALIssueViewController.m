@@ -43,15 +43,22 @@
 
 - (void)setupUI
 {
-    UILabel *createLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 235.0f, 30.0f)];
-    createLabel.text = [NSString stringWithFormat:@"New Issue (%@)", [_repository objectForKey:@"name"]];
-    createLabel.backgroundColor = [UIColor whiteColor];
+    UILabel *createLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 100.0f, 30.0f)];
+    createLabel.text = @"New Issue";
+    createLabel.backgroundColor = [UIColor clearColor];
     createLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     createLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
     [self.view addSubview:createLabel];
     
+    UILabel *repoLabel = [[UILabel alloc] initWithFrame:CGRectMake(95.0f, 10.0f, 165.0f, 30.0f)];
+    repoLabel.text = [NSString stringWithFormat:@"(%@)", [_repository objectForKey:@"name"]];
+    repoLabel.backgroundColor = [UIColor clearColor];
+    repoLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
+    repoLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
+    [self.view addSubview:repoLabel];
+    
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.frame = CGRectMake(255.0f, 11.0f, 50.0f, 30.0f);
+    cancelButton.frame = CGRectMake(265.0f, 11.0f, 50.0f, 30.0f);
     cancelButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
