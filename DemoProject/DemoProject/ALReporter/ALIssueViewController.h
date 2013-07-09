@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UAGithubEngine.h"
 
 @interface ALIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
+@property (nonatomic, strong) UAGithubEngine *engine;
 @property (nonatomic, strong) NSDictionary *repository;
-@property (nonatomic, strong) NSDictionary *issueDictionary;
+@property (nonatomic, strong) NSArray *tags;
+@property (nonatomic, strong) NSArray *asignees;
+@property (nonatomic, strong) NSMutableDictionary *issueDictionary;
 @end

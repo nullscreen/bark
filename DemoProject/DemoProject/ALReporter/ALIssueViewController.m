@@ -14,7 +14,7 @@
 @end
 
 @implementation ALIssueViewController
-@synthesize repository = _repository, issueDictionary = _issueDictionary;
+@synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary, tags = _tags, asignees = _asignees;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,18 +28,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Create an Issue";
     self.navigationController.navigationBar.hidden =  YES;
     self.view.backgroundColor = [UIColor colorWithWhite:(245.0f/255.0f) alpha:1.0f];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                                                target:self
-                                                                                                                action:@selector(cancelPressed)];
+    [self setupUI];
+    [self getLabelsAndAssignees];
+    
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] init];
     recognizer.delegate = self;
     [self.view addGestureRecognizer:recognizer];
-    
-    [self setupUI];
-    NSLog(@"%@", _repository);
     
 }
 
@@ -108,7 +104,7 @@
     bodyField.text = @"Leave a comment...";
     [self.view addSubview:bodyField];
     
-    UILabel *tagLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 330.0f, 200.0f, 30.0f)];
+    UILabel *tagLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 300.0f, 200.0f, 30.0f)];
     tagLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
     tagLabel.text = @"Add Tags";
     tagLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
@@ -125,7 +121,15 @@
     [createIssueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [createIssueButton addTarget:self action:@selector(createIssuePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:createIssueButton];
-    
+}
+
+- (void)getLabelsAndAssignees
+{
+    [_engine labelsForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
+        NSLog(@"%@", response);
+    } failure:^(NSError *error) {
+        NSLog(@"Request failed with error %@", error);
+    }];
     
 }
 
@@ -148,7 +152,6 @@
 
 - (void)createIssuePressed:(UIButton *)button
 {
-    //- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
     /*
      {
          "title": "Found a bug",
@@ -161,14 +164,12 @@
          ]
      }
      */
-    
-    _issueDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Test Issue #1", @"title",
+    self.view.userInteractionEnabled = NO;
+    _issueDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"Test Issue #1", @"title",
                                                                     @"This is the body of the issue.", @"body",
                                                                     @[@"test"],@"labels", nil];
-    self.view.userInteractionEnabled = NO;
     [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
-    UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
-    [engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
+    [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
         [button setTitle:@"Success!" forState:UIControlStateNormal];
     } failure:^(NSError *error) {
         NSLog(@"error");
@@ -185,6 +186,7 @@
 
 
 #pragma mark - UITextFieldDelegate
+#pragma mark - UITextViewDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -192,7 +194,6 @@
         textField.text = @"";
     }
 }
-
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
