@@ -49,24 +49,15 @@
     if(buttonIndex == 0) {
         [self showEmailView];
     } else if (buttonIndex == 1) {
-        
         UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
-        
-        // check to make sure the repository exists
-        [engine repositoriesWithSuccess:^(id response) {
-            NSArray *repositories = response;
-            for (int i=0; i<repositories.count; i++) {
-                if([self.repositoryName isEqualToString:[[repositories objectAtIndex:i] objectForKey:@"name"]]) {
-                    ALIssueViewController *issueView = [[ALIssueViewController alloc] init];
-                    issueView.repository = [repositories objectAtIndex:i];
-                    issueView.engine = engine;
-                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
-                    [self.rootViewController presentViewController:navController animated:YES completion:nil];
-                    
-                }
-            }
+        [engine repository:_repositoryName success:^(id response) {
+            ALIssueViewController *issueView = [[ALIssueViewController alloc] init];
+            issueView.repository = [response objectAtIndex:0];
+            issueView.engine = engine;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
+            [self.rootViewController presentViewController:navController animated:YES completion:nil];
         } failure:^(NSError *error) {
-            NSLog(@"Oops: %@", error);
+            NSLog(@"Request failed with error: %@", error);
         }];
         
     }

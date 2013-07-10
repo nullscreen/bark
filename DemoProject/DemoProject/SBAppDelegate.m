@@ -15,7 +15,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     ALWindow *window = [[ALWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    window.repositoryName = @"ALReporter";
+    window.repositoryName = @"stagebloc/ALReporter";
     
     self.window = window;
     // Override point for customization after application launch.
