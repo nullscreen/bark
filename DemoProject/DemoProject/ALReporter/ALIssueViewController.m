@@ -10,6 +10,9 @@
 #import "UAGithubEngine.h"
 
 @interface ALIssueViewController ()
+{
+    UITapGestureRecognizer *recognizer;
+}
 
 @end
 
@@ -33,10 +36,10 @@
     [self setupUI];
     [self getRepoData];
     
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] init];
+    recognizer = [[UITapGestureRecognizer alloc] init];
     recognizer.delegate = self;
+    recognizer.enabled = NO;
     [self.view addGestureRecognizer:recognizer];
-    
 }
 
 #pragma mark - Setup
@@ -207,6 +210,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    recognizer.enabled = YES;
     if([textField.text isEqualToString:@"Title"]) {
         textField.text = @"";
     }
@@ -214,6 +218,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    recognizer.enabled = YES;
     if([textView.text isEqualToString:@"Leave a comment..."]) {
         textView.text = @"";
     }
@@ -225,6 +230,7 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     [self dismissKeyboard];
+    recognizer.enabled = NO;
     return YES;
 }
 
