@@ -123,6 +123,7 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 295.0f, self.view.frame.size.height, self.view.frame.size.height-295.0f-50.0f)];
     tableView.dataSource = self;
     tableView.delegate = self;
+    tableView.allowsMultipleSelection = YES;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
 }
@@ -253,6 +254,11 @@
     return _labels.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 45.0f;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell Identifier"];
@@ -268,5 +274,21 @@
     
     return cell;
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+
+/*
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView.contentOffset.y < 0) {
+        scrollView.contentOffset = CGPointZero;
+    }
+
+}
+*/
 
 @end
