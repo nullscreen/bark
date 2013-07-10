@@ -39,6 +39,8 @@
     
 }
 
+#pragma mark - Setup
+
 - (void)setupUI
 {
     UILabel *createLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 100.0f, 30.0f)];
@@ -104,13 +106,6 @@
     bodyField.text = @"Leave a comment...";
     [self.view addSubview:bodyField];
     
-    UILabel *tagLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 300.0f, 200.0f, 30.0f)];
-    tagLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
-    tagLabel.text = @"Add Tags";
-    tagLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
-    tagLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:tagLabel];
-    
     UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [createIssueButton setBackgroundColor:[UIColor colorWithRed:(30.0f/255.0f) green:(71.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f]];
     createIssueButton.frame = CGRectMake(0.0f, self.view.frame.size.height-50.0f, self.view.frame.size.width, 50.0f);
@@ -123,10 +118,20 @@
     [self.view addSubview:createIssueButton];
 }
 
+- (void)setupLabels
+{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 295.0f, self.view.frame.size.height, self.view.frame.size.height-295.0f-50.0f)];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableView];
+}
+
 - (void)getRepoData
 {
     [_engine labelsForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
         _labels = response;
+        [self setupLabels];
     } failure:^(NSError *error) {
         NSLog(@"Request failed with error %@", error);
     }];
@@ -231,6 +236,37 @@
             [view resignFirstResponder];
         }
     }
+}
+
+- (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:0]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _labels.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell Identifier"];
+    if (!cell) {
+        NSDictionary *label = [_labels objectAtIndex:indexPath.row];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell Identifier"];
+        cell.textLabel.text = [label objectForKey:@"name"];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.contentView.backgroundColor = [self colorFromHexString:[label objectForKey:@"color"]];
+    }
+    
+    return cell;
 }
 
 @end
