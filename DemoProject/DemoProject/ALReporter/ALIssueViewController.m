@@ -8,6 +8,7 @@
 
 #import "ALIssueViewController.h"
 #import "UAGithubEngine.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ALIssueViewController ()
 {
@@ -279,29 +280,30 @@
     cell.textLabel.textColor = [UIColor colorWithWhite:(50.0f/255.0f) alpha:1.0f];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    UIView *labelColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 5.0f, cell.frame.size.height)];
+    UIView *labelColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 5.0f, 45.0f)];
     labelColorView.backgroundColor = [self colorFromHexString:[label objectForKey:@"color"]];
     [cell.contentView addSubview:labelColorView];
+    
+    UIView *labelColorView2 = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-5.0f, 0.0f, 5.0f, 45.0f)];
+    labelColorView2.backgroundColor = [self colorFromHexString:[label objectForKey:@"color"]];
+    [cell.contentView addSubview:labelColorView2];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    NSDictionary *label = [_labels objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UIView *selectedView = [[UIView alloc] initWithFrame:CGRectMake(300.0f, 15.0f, 10.0f, 10.0f)];
-    selectedView.tag = 10;
-    selectedView.backgroundColor = [UIColor colorWithRed:(30.0f/255.0f) green:(71.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
-    [cell addSubview:selectedView];
+    cell.layer.borderColor = [self colorFromHexString:[label objectForKey:@"color"]].CGColor;
+    cell.layer.borderWidth = 5.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    for(UIView *view in [[tableView cellForRowAtIndexPath:indexPath] subviews]) {
-        if(view.tag == 10) {
-            [view removeFromSuperview];
-        }
-    }
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.layer.borderWidth = 0.0f;
 }
 
 
