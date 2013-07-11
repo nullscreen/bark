@@ -111,7 +111,7 @@
     [self.view addSubview:bodyField];
     
     UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [createIssueButton setBackgroundColor:[UIColor colorWithRed:(30.0f/255.0f) green:(71.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f]];
+    [createIssueButton setBackgroundColor:[UIColor colorWithRed:(30.0f/255.0f) green:(30.0f/255.0f) blue:(34.0f/255.0f) alpha:1.0f]];
     createIssueButton.frame = CGRectMake(0.0f, self.view.frame.size.height-50.0f, self.view.frame.size.width, 50.0f);
     createIssueButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     createIssueButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -277,14 +277,14 @@
     cell.textLabel.text = [label objectForKey:@"name"];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
     cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.textLabel.textColor = [UIColor colorWithWhite:(50.0f/255.0f) alpha:1.0f];
+    cell.textLabel.textColor = [UIColor colorWithWhite:(25.0f/255.0f) alpha:1.0f];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    UIView *labelColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 5.0f, 45.0f)];
+    UIView *labelColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 2.0f, 45.0f)];
     labelColorView.backgroundColor = [self colorFromHexString:[label objectForKey:@"color"]];
     [cell.contentView addSubview:labelColorView];
     
-    UIView *labelColorView2 = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-5.0f, 0.0f, 5.0f, 45.0f)];
+    UIView *labelColorView2 = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-2.0f, 0.0f, 2.0f, 45.0f)];
     labelColorView2.backgroundColor = [self colorFromHexString:[label objectForKey:@"color"]];
     [cell.contentView addSubview:labelColorView2];
     
@@ -296,12 +296,12 @@
     NSDictionary *label = [_labels objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.layer.borderColor = [self colorFromHexString:[label objectForKey:@"color"]].CGColor;
-    cell.layer.borderWidth = 5.0f;
+    cell.layer.borderWidth = 2.0f;
     
-    UIView *alphaView = [[UIView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.frame.size.width-10.0f, 35.0f)];
+    UIView *alphaView = [[UIView alloc] initWithFrame:CGRectMake(2.0f, 2.0f, self.view.frame.size.width-4.0f, 41.0f)];
     alphaView.tag = 11;
     CGColorRef alphaColor = [self colorFromHexString:[label objectForKey:@"color"]].CGColor;
-    alphaView.backgroundColor = [UIColor colorWithCGColor:CGColorCreateCopyWithAlpha(alphaColor, 0.3f)];
+    alphaView.backgroundColor = [UIColor colorWithCGColor:CGColorCreateCopyWithAlpha(alphaColor, 0.2f)];
     [cell.contentView addSubview:alphaView];
     [cell.contentView sendSubviewToBack:alphaView];
 }
