@@ -13,6 +13,8 @@
 @interface ALIssueViewController ()
 {
     UITapGestureRecognizer *recognizer;
+    UIPickerView *pickerView;
+    BOOL showingAssignees;
 }
 
 @end
@@ -41,6 +43,12 @@
     recognizer.delegate = self;
     recognizer.enabled = NO;
     [self.view addGestureRecognizer:recognizer];
+    
+    pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 216)];
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    pickerView.showsSelectionIndicator = YES;
+    [self.view addSubview:pickerView];
 }
 
 #pragma mark - Setup
@@ -144,13 +152,13 @@
     [_engine assigneesForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
         _asignees = response;
     } failure:^(NSError *error) {
-        ;
+        NSLog(@"Request failed with error %@", error);
     }];
     
-    [_engine milestonesForRepository:@"" success:^(id response) {
+    [_engine milestonesForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
         _milestones = response;
     } failure:^(NSError *error) {
-        ;
+        NSLog(@"Request failed with error %@", error);
     }];
 }
 
@@ -158,12 +166,26 @@
 
 - (void)assignPressed
 {
-    NSLog(@"assign pressed");
+    showingAssignees = YES;
+    recognizer.enabled = YES;
+    [pickerView reloadAllComponents];
+    [UIView beginAnimations: nil context: NULL];
+    [UIView setAnimationDuration: 0.4];
+    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+    [pickerView setFrame:CGRectMake(0, self.view.frame.size.height-216, 320, 216)];
+    [UIView commitAnimations];
 }
 
 - (void)milestonePressed
 {
-    NSLog(@"milestone pressed");
+    showingAssignees = NO;
+    recognizer.enabled = YES;
+    [pickerView reloadAllComponents];
+    [UIView beginAnimations: nil context: NULL];
+    [UIView setAnimationDuration: 0.4];
+    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+    [pickerView setFrame:CGRectMake(0, self.view.frame.size.height-216, 320, 216)];
+    [UIView commitAnimations];
 }
 
 - (void)cancelPressed
@@ -207,7 +229,6 @@
 
 
 #pragma mark - UITextFieldDelegate
-#pragma mark - UITextViewDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -216,6 +237,8 @@
         textField.text = @"";
     }
 }
+
+#pragma mark - UITextViewDelegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
@@ -226,7 +249,7 @@
     
 }
 
-#pragma mark = UIGestureRecognizerDelegate
+#pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
@@ -242,6 +265,14 @@
             [view resignFirstResponder];
         } else if ([view isKindOfClass:[UITextView class]] && [view isFirstResponder]) {
             [view resignFirstResponder];
+        } else if ([view isKindOfClass:[UIPickerView class]]) {
+            [UIView beginAnimations: nil context: NULL];
+            [UIView setAnimationDuration: 0.4];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDidStopSelector:@selector(animationStopped:finished:context:)];
+            [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+            [pickerView setFrame:CGRectMake(0, self.view.frame.size.height, 320, 216)];
+            [UIView commitAnimations];
         }
     }
 }
@@ -291,6 +322,8 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *label = [_labels objectAtIndex:indexPath.row];
@@ -319,11 +352,38 @@
     }
 }
 
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y < 0) {
         scrollView.contentOffset = CGPointZero;
     }
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return showingAssignees ? _asignees.count : _milestones.count;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSDictionary *user = showingAssignees ? [_asignees objectAtIndex:row] : [_milestones objectAtIndex:row];
+    return showingAssignees ? [user objectForKey:@"login"] : [user objectForKey:@"title"];
+}
+
+#pragma mark = UIPickerViewDelegate
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
+    
+}
+
+#pragma mark - UIViewAnimationDelegate
+
+-(void)animationStopped:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
+    recognizer.enabled = NO;
 }
 
 @end
