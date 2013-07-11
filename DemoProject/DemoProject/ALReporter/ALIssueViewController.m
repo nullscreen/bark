@@ -297,6 +297,13 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.layer.borderColor = [self colorFromHexString:[label objectForKey:@"color"]].CGColor;
     cell.layer.borderWidth = 5.0f;
+    
+    UIView *alphaView = [[UIView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.frame.size.width-10.0f, 35.0f)];
+    alphaView.tag = 11;
+    CGColorRef alphaColor = [self colorFromHexString:[label objectForKey:@"color"]].CGColor;
+    alphaView.backgroundColor = [UIColor colorWithCGColor:CGColorCreateCopyWithAlpha(alphaColor, 0.3f)];
+    [cell.contentView addSubview:alphaView];
+    [cell.contentView sendSubviewToBack:alphaView];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -304,6 +311,12 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.layer.borderColor = [UIColor clearColor].CGColor;
     cell.layer.borderWidth = 0.0f;
+    
+    for(UIView *view in [cell.contentView subviews]) {
+        if(view.tag == 11) {
+            [view removeFromSuperview];
+        }
+    }
 }
 
 
