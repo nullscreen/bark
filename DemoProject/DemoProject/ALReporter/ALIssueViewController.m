@@ -269,32 +269,46 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell Identifier"];
     if (!cell) {
-        NSDictionary *label = [_labels objectAtIndex:indexPath.row];
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell Identifier"];
-        cell.textLabel.text = [label objectForKey:@"name"];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
-        cell.textLabel.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.contentView.backgroundColor = [self colorFromHexString:[label objectForKey:@"color"]];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell Identifier"];
     }
+    
+    NSDictionary *label = [_labels objectAtIndex:indexPath.row];
+    cell.textLabel.text = [label objectForKey:@"name"];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor colorWithWhite:(50.0f/255.0f) alpha:1.0f];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UIView *labelColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 5.0f, cell.frame.size.height)];
+    labelColorView.backgroundColor = [self colorFromHexString:[label objectForKey:@"color"]];
+    [cell.contentView addSubview:labelColorView];
     
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UIView *selectedView = [[UIView alloc] initWithFrame:CGRectMake(300.0f, 15.0f, 10.0f, 10.0f)];
+    selectedView.tag = 10;
+    selectedView.backgroundColor = [UIColor colorWithRed:(30.0f/255.0f) green:(71.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
+    [cell addSubview:selectedView];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    for(UIView *view in [[tableView cellForRowAtIndexPath:indexPath] subviews]) {
+        if(view.tag == 10) {
+            [view removeFromSuperview];
+        }
+    }
 }
 
 
-/*
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y < 0) {
         scrollView.contentOffset = CGPointZero;
     }
-
 }
-*/
 
 @end
