@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UAGithubEngine.h"
 
-@interface ALIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface SBIssueViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic, strong) UAGithubEngine *engine;
 @property (nonatomic, strong) NSDictionary *repository;
 @property (nonatomic, strong) NSArray *labels;

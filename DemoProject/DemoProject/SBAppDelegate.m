@@ -8,13 +8,13 @@
 
 #import "SBAppDelegate.h"
 #import "SBRootViewController.h"
-#import "ALWindow.h"
+#import "SBWindow.h"
 
 @implementation SBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    ALWindow *window = [[ALWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     window.repositoryName = @"stagebloc/bark";
     
     self.window = window;

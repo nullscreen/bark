@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Austin Louden. All rights reserved.
 //
 
-#import "ALWindow.h"
+#import "SBWindow.h"
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
 #import <sys/utsname.h>
 #import "UAGithubEngine.h"
-#import "ALIssueViewController.h"
+#import "SBIssueViewController.h"
 
-@implementation ALWindow
+@implementation SBWindow
 @synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody,
             attachScreenshot = _attachScreenshot, repositoryName = _repositoryName;
 
@@ -52,7 +52,7 @@
     } else if (buttonIndex == 1) {
         UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
         [engine repository:_repositoryName success:^(id response) {
-            ALIssueViewController *issueView = [[ALIssueViewController alloc] init];
+            SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
             issueView.repository = [response objectAtIndex:0];
             issueView.engine = engine;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];

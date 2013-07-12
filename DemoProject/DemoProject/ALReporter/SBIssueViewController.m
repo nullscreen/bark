@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Austin Louden. All rights reserved.
 //
 
-#import "ALIssueViewController.h"
+#import "SBIssueViewController.h"
 #import "UAGithubEngine.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define ASSIGN_BUTTON_TAG 1
 #define MILESTONE_BUTTON_TAG 2
 
-@interface ALIssueViewController ()
+@interface SBIssueViewController ()
 {
     UITapGestureRecognizer *recognizer;
     UIPickerView *pickerView;
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation ALIssueViewController
+@implementation SBIssueViewController
 @synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary, labels = _labels, asignees = _asignees, milestones = _milestones;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

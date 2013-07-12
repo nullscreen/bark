@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		89260E58178B986900BE15EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89260E57178B986900BE15EA /* SystemConfiguration.framework */; };
-		89260E5B178BAA7F00BE15EA /* ALIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89260E5A178BAA7F00BE15EA /* ALIssueViewController.m */; };
+		89260E5B178BAA7F00BE15EA /* SBIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89260E5A178BAA7F00BE15EA /* SBIssueViewController.m */; };
 		89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292B81784C5D3009DD393 /* UIKit.framework */; };
 		89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BC1784C5D3009DD393 /* CoreGraphics.framework */; };
@@ -24,7 +24,7 @@
 		89F292E11784C5D3009DD393 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89F292DF1784C5D3009DD393 /* InfoPlist.strings */; };
 		89F292E41784C5D3009DD393 /* DemoProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292E31784C5D3009DD393 /* DemoProjectTests.m */; };
 		89F292EF1784C8ED009DD393 /* SBRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292EE1784C8ED009DD393 /* SBRootViewController.m */; };
-		89F292F31784DFD2009DD393 /* ALWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292F21784DFD2009DD393 /* ALWindow.m */; };
+		89F292F31784DFD2009DD393 /* SBWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292F21784DFD2009DD393 /* SBWindow.m */; };
 		89F292F51784EC33009DD393 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292F41784EC33009DD393 /* MessageUI.framework */; };
 		89F29311178680E2009DD393 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89F292F8178680E2009DD393 /* InfoPlist.strings */; };
 		89F29312178680E2009DD393 /* NSArray+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F292FB178680E2009DD393 /* NSArray+Utilities.m */; };
@@ -52,8 +52,8 @@
 
 /* Begin PBXFileReference section */
 		89260E57178B986900BE15EA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		89260E59178BAA7F00BE15EA /* ALIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALIssueViewController.h; sourceTree = "<group>"; };
-		89260E5A178BAA7F00BE15EA /* ALIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALIssueViewController.m; sourceTree = "<group>"; };
+		89260E59178BAA7F00BE15EA /* SBIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBIssueViewController.h; sourceTree = "<group>"; };
+		89260E5A178BAA7F00BE15EA /* SBIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBIssueViewController.m; sourceTree = "<group>"; };
 		89F292B51784C5D3009DD393 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F292B81784C5D3009DD393 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		89F292BA1784C5D3009DD393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,8 +75,8 @@
 		89F292E31784C5D3009DD393 /* DemoProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoProjectTests.m; sourceTree = "<group>"; };
 		89F292ED1784C8ED009DD393 /* SBRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRootViewController.h; sourceTree = "<group>"; };
 		89F292EE1784C8ED009DD393 /* SBRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRootViewController.m; sourceTree = "<group>"; };
-		89F292F11784DFD2009DD393 /* ALWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALWindow.h; sourceTree = "<group>"; };
-		89F292F21784DFD2009DD393 /* ALWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALWindow.m; sourceTree = "<group>"; };
+		89F292F11784DFD2009DD393 /* SBWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBWindow.h; sourceTree = "<group>"; };
+		89F292F21784DFD2009DD393 /* SBWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBWindow.m; sourceTree = "<group>"; };
 		89F292F41784EC33009DD393 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		89F292F9178680E2009DD393 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89F292FA178680E2009DD393 /* NSArray+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Utilities.h"; sourceTree = "<group>"; };
@@ -212,10 +212,10 @@
 			isa = PBXGroup;
 			children = (
 				89F292F7178680E2009DD393 /* UAGitHubEngine */,
-				89F292F11784DFD2009DD393 /* ALWindow.h */,
-				89F292F21784DFD2009DD393 /* ALWindow.m */,
-				89260E59178BAA7F00BE15EA /* ALIssueViewController.h */,
-				89260E5A178BAA7F00BE15EA /* ALIssueViewController.m */,
+				89F292F11784DFD2009DD393 /* SBWindow.h */,
+				89F292F21784DFD2009DD393 /* SBWindow.m */,
+				89260E59178BAA7F00BE15EA /* SBIssueViewController.h */,
+				89260E5A178BAA7F00BE15EA /* SBIssueViewController.m */,
 			);
 			path = ALReporter;
 			sourceTree = "<group>";
@@ -366,7 +366,7 @@
 				89F292C51784C5D3009DD393 /* main.m in Sources */,
 				89F292C91784C5D3009DD393 /* SBAppDelegate.m in Sources */,
 				89F292EF1784C8ED009DD393 /* SBRootViewController.m in Sources */,
-				89F292F31784DFD2009DD393 /* ALWindow.m in Sources */,
+				89F292F31784DFD2009DD393 /* SBWindow.m in Sources */,
 				89F29312178680E2009DD393 /* NSArray+Utilities.m in Sources */,
 				89F29313178680E2009DD393 /* NSData+Base64.m in Sources */,
 				89F29314178680E2009DD393 /* NSInvocation+Blocks.m in Sources */,
@@ -377,7 +377,7 @@
 				89F2931A178680E2009DD393 /* UAGithubJSONParser.m in Sources */,
 				89F2931B178680E2009DD393 /* UAGithubURLConnection.m in Sources */,
 				89F2931C178680E2009DD393 /* UAReachability.m in Sources */,
-				89260E5B178BAA7F00BE15EA /* ALIssueViewController.m in Sources */,
+				89260E5B178BAA7F00BE15EA /* SBIssueViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
