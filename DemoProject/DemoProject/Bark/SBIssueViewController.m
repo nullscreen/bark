@@ -74,7 +74,7 @@
     [self.view addSubview:createLabel];
     
     UILabel *repoLabel = [[UILabel alloc] initWithFrame:CGRectMake(95.0f, 10.0f, 165.0f, 30.0f)];
-    repoLabel.text = [NSString stringWithFormat:@"(%@)", [_repository objectForKey:@"name"]];
+    repoLabel.text = [NSString stringWithFormat:@"(%@)", [_repository objectForKey:@"full_name"]];
     repoLabel.backgroundColor = [UIColor clearColor];
     repoLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     repoLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
