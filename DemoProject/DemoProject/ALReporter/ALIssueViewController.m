@@ -210,18 +210,6 @@
 
 - (void)createIssuePressed:(UIButton *)button
 {
-    /*
-     {
-         "title": "Found a bug",
-         "body": "I'm having a problem with this.",
-         "assignee": "octocat",
-         "milestone": 1,
-         "labels": [
-         "Label1",
-         "Label2"
-         ]
-     }
-     */
     //self.view.userInteractionEnabled = NO;
 
     _issueDictionary = [NSMutableDictionary dictionary];
@@ -245,14 +233,12 @@
     
     NSLog(@"%@", _issueDictionary);
     
-    /*
     [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
     [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
         [button setTitle:@"Success!" forState:UIControlStateNormal];
     } failure:^(NSError *error) {
         NSLog(@"error");
     }];
-     */
     
 }
 
