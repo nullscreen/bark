@@ -10,6 +10,9 @@
 #import "UAGithubEngine.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define ASSIGN_BUTTON_TAG 1
+#define MILESTONE_BUTTON_TAG 2
+
 @interface ALIssueViewController ()
 {
     UITapGestureRecognizer *recognizer;
@@ -90,8 +93,9 @@
     [self.view addSubview:titleField];
     
     UIButton *assignButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [assignButton setBackgroundColor:[UIColor colorWithRed:(61.0f/255.0f) green:(154.0f/255.0f) blue:(232.0f/255.0f) alpha:1.0f]];
     assignButton.frame = CGRectMake(0.0f, 95.0f, self.view.frame.size.width/2, 50.0f);
+    assignButton.tag = ASSIGN_BUTTON_TAG;
+    [assignButton setBackgroundColor:[UIColor colorWithRed:(61.0f/255.0f) green:(154.0f/255.0f) blue:(232.0f/255.0f) alpha:1.0f]];
     assignButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     assignButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     assignButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
@@ -101,8 +105,9 @@
     [self.view addSubview:assignButton];
     
     UIButton *milestoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [milestoneButton setBackgroundColor:[UIColor colorWithRed:(89.0f/255.0f) green:(163.0f/255.0f) blue:(252.0f/255.0f) alpha:1.0f]];
     milestoneButton.frame = CGRectMake(self.view.frame.size.width/2, 95.0f, self.view.frame.size.width/2, 50.0f);
+    milestoneButton.tag = MILESTONE_BUTTON_TAG;
+    [milestoneButton setBackgroundColor:[UIColor colorWithRed:(89.0f/255.0f) green:(163.0f/255.0f) blue:(252.0f/255.0f) alpha:1.0f]];
     milestoneButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     milestoneButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     milestoneButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
@@ -255,9 +260,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    NSLog(@"here GR");
     if(!CGRectContainsPoint(pickerView.frame, [touch locationInView:self.view])) {
-        NSLog(@"here IF");
         [self dismissKeyboard];
         recognizer.enabled = NO;
     }
@@ -366,7 +369,7 @@
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return showingAssignees ? _asignees.count : _milestones.count;
+    return showingAssignees ? _asignees.count+1 : _milestones.count+1;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -374,14 +377,31 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSDictionary *user = showingAssignees ? [_asignees objectAtIndex:row] : [_milestones objectAtIndex:row];
-    return showingAssignees ? [user objectForKey:@"login"] : [user objectForKey:@"title"];
+    if(row == 0) {
+        return showingAssignees ? @"No assignee" : @"No milestone";
+    } else {
+        NSDictionary *user = showingAssignees ? [_asignees objectAtIndex:row-1] : [_milestones objectAtIndex:row-1];
+        return showingAssignees ? [user objectForKey:@"login"] : [user objectForKey:@"title"];
+    }
 }
 
 #pragma mark = UIPickerViewDelegate
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
-    
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component
+{
+    if(showingAssignees) {
+        if(row == 0) {
+            [(UIButton*)[self.view viewWithTag:ASSIGN_BUTTON_TAG] setTitle:@"Tap to assign\na teammate" forState:UIControlStateNormal];
+        } else {
+            [(UIButton*)[self.view viewWithTag:ASSIGN_BUTTON_TAG] setTitle:[NSString stringWithFormat:@"%@\nis assigned", [[_asignees objectAtIndex:row-1] objectForKey:@"login"]] forState:UIControlStateNormal];
+        }
+    } else {
+        if(row == 0) {
+            [(UIButton*)[self.view viewWithTag:MILESTONE_BUTTON_TAG] setTitle:@"Tap to set\na milestone" forState:UIControlStateNormal];
+        } else {
+            [(UIButton*)[self.view viewWithTag:MILESTONE_BUTTON_TAG] setTitle:[NSString stringWithFormat:@"%@", [[_milestones objectAtIndex:row-1] objectForKey:@"title"]] forState:UIControlStateNormal];
+        }
+    }
 }
 
 @end
