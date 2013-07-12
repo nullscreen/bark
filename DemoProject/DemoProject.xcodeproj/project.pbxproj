@@ -133,7 +133,6 @@
 		8907B5DE1790AFE2009387E1 /* Bark */ = {
 			isa = PBXGroup;
 			children = (
-				8907B5DF1790AFE2009387E1 /* AFNetworking */,
 				8907B5E01790AFE2009387E1 /* SBIssueViewController.h */,
 				8907B5E11790AFE2009387E1 /* SBIssueViewController.m */,
 				8907B5E21790AFE2009387E1 /* SBWindow.h */,
@@ -141,13 +140,6 @@
 				8907B5E41790AFE2009387E1 /* UAGitHubEngine */,
 			);
 			path = Bark;
-			sourceTree = "<group>";
-		};
-		8907B5DF1790AFE2009387E1 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		8907B5E41790AFE2009387E1 /* UAGitHubEngine */ = {
