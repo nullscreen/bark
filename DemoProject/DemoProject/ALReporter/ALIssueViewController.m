@@ -166,11 +166,12 @@
 
 - (void)assignPressed
 {
+    [self dismissKeyboard];
     showingAssignees = YES;
     recognizer.enabled = YES;
     [pickerView reloadAllComponents];
     [UIView beginAnimations: nil context: NULL];
-    [UIView setAnimationDuration: 0.4];
+    [UIView setAnimationDuration: 0.3];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [pickerView setFrame:CGRectMake(0, self.view.frame.size.height-216, 320, 216)];
     [UIView commitAnimations];
@@ -178,11 +179,12 @@
 
 - (void)milestonePressed
 {
+    [self dismissKeyboard];
     showingAssignees = NO;
     recognizer.enabled = YES;
     [pickerView reloadAllComponents];
     [UIView beginAnimations: nil context: NULL];
-    [UIView setAnimationDuration: 0.4];
+    [UIView setAnimationDuration: 0.3];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
     [pickerView setFrame:CGRectMake(0, self.view.frame.size.height-216, 320, 216)];
     [UIView commitAnimations];
@@ -253,8 +255,12 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    [self dismissKeyboard];
-    recognizer.enabled = NO;
+    NSLog(@"here GR");
+    if(!CGRectContainsPoint(pickerView.frame, [touch locationInView:self.view])) {
+        NSLog(@"here IF");
+        [self dismissKeyboard];
+        recognizer.enabled = NO;
+    }
     return YES;
 }
 
@@ -266,10 +272,9 @@
         } else if ([view isKindOfClass:[UITextView class]] && [view isFirstResponder]) {
             [view resignFirstResponder];
         } else if ([view isKindOfClass:[UIPickerView class]]) {
+            recognizer.enabled = NO;
             [UIView beginAnimations: nil context: NULL];
             [UIView setAnimationDuration: 0.4];
-            [UIView setAnimationDelegate:self];
-            [UIView setAnimationDidStopSelector:@selector(animationStopped:finished:context:)];
             [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
             [pickerView setFrame:CGRectMake(0, self.view.frame.size.height, 320, 216)];
             [UIView commitAnimations];
@@ -377,13 +382,6 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow: (NSInteger)row inComponent:(NSInteger)component {
     
-}
-
-#pragma mark - UIViewAnimationDelegate
-
--(void)animationStopped:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-    recognizer.enabled = NO;
 }
 
 @end
