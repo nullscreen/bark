@@ -18,6 +18,12 @@
     UITapGestureRecognizer *recognizer;
     UIPickerView *pickerView;
     BOOL showingAssignees;
+    
+    UITextField *titleField;
+    UITextView *bodyField;
+    NSString *selectedAssignee;
+    NSNumber *selectedMilestone;
+    NSMutableArray *selectedLabels;
 }
 
 @end
@@ -52,6 +58,8 @@
     pickerView.dataSource = self;
     pickerView.showsSelectionIndicator = YES;
     [self.view addSubview:pickerView];
+    
+    selectedLabels = [NSMutableArray array];
 }
 
 #pragma mark - Setup
@@ -82,7 +90,7 @@
     [cancelButton addTarget:self action:@selector(cancelPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelButton];
     
-    UITextField *titleField = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 45.0f, self.view.frame.size.width, 50.0f)];
+    titleField = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 45.0f, self.view.frame.size.width, 50.0f)];
     titleField.text = @"Title";
     titleField.delegate = self;
     titleField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -116,7 +124,7 @@
     [milestoneButton addTarget:self action:@selector(milestonePressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:milestoneButton];
     
-    UITextView *bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 150.0f)];
+    bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 150.0f)];
     bodyField.delegate = self;
     bodyField.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     bodyField.backgroundColor = [UIColor whiteColor];
@@ -214,16 +222,37 @@
          ]
      }
      */
-    self.view.userInteractionEnabled = NO;
-    _issueDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"Test Issue #1", @"title",
-                                                                    @"This is the body of the issue.", @"body",
-                                                                    @[@"test"],@"labels", nil];
+    //self.view.userInteractionEnabled = NO;
+
+    _issueDictionary = [NSMutableDictionary dictionary];
+    if(![titleField.text isEqualToString:@"Title"] && ![titleField.text isEqualToString:@""]) { [_issueDictionary setObject:titleField.text forKey:@"title"]; }
+    else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Hold on!"
+                                                            message:@"Issues must have a title."
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+        [alertView show];
+        
+        self.view.userInteractionEnabled = YES;
+        return;
+    }
+    
+    if(selectedAssignee) { [_issueDictionary setObject:selectedAssignee forKey:@"assignee"]; }
+    if(selectedMilestone) { [_issueDictionary setObject:selectedMilestone forKey:@"milestone"]; }
+    if(![bodyField.text isEqualToString:@"Leave a comment..."] && ![bodyField.text isEqualToString:@""]) {[_issueDictionary setObject:bodyField.text forKey:@"body"];}
+    if(selectedLabels.count > 0) { [_issueDictionary setObject:selectedLabels forKey:@"labels"]; }
+    
+    NSLog(@"%@", _issueDictionary);
+    
+    /*
     [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
     [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
         [button setTitle:@"Success!" forState:UIControlStateNormal];
     } failure:^(NSError *error) {
         NSLog(@"error");
     }];
+     */
     
 }
 
@@ -345,6 +374,9 @@
     alphaView.backgroundColor = [UIColor colorWithCGColor:CGColorCreateCopyWithAlpha(alphaColor, 0.2f)];
     [cell.contentView addSubview:alphaView];
     [cell.contentView sendSubviewToBack:alphaView];
+    
+    [selectedLabels addObject:[label objectForKey:@"name"]];
+    NSLog(@"%@", selectedLabels);
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -358,6 +390,9 @@
             [view removeFromSuperview];
         }
     }
+    
+    [selectedLabels removeObject:cell.textLabel.text];
+    NSLog(@"%@", selectedLabels);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -392,14 +427,18 @@
     if(showingAssignees) {
         if(row == 0) {
             [(UIButton*)[self.view viewWithTag:ASSIGN_BUTTON_TAG] setTitle:@"Tap to assign\na teammate" forState:UIControlStateNormal];
+            selectedAssignee = nil;
         } else {
             [(UIButton*)[self.view viewWithTag:ASSIGN_BUTTON_TAG] setTitle:[NSString stringWithFormat:@"%@\nis assigned", [[_asignees objectAtIndex:row-1] objectForKey:@"login"]] forState:UIControlStateNormal];
+            selectedAssignee = [[_asignees objectAtIndex:row-1] objectForKey:@"login"];
         }
     } else {
         if(row == 0) {
             [(UIButton*)[self.view viewWithTag:MILESTONE_BUTTON_TAG] setTitle:@"Tap to set\na milestone" forState:UIControlStateNormal];
+            selectedMilestone = nil;
         } else {
             [(UIButton*)[self.view viewWithTag:MILESTONE_BUTTON_TAG] setTitle:[NSString stringWithFormat:@"%@", [[_milestones objectAtIndex:row-1] objectForKey:@"title"]] forState:UIControlStateNormal];
+            selectedMilestone = [NSNumber numberWithInt:[[[_milestones objectAtIndex:row-1] objectForKey:@"number"] integerValue]];
         }
     }
 }
