@@ -43,7 +43,7 @@
     nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     nameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     nameField.backgroundColor = [UIColor whiteColor];
-    nameField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
+    nameField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
     nameField.textAlignment = NSTextAlignmentCenter;
     nameField.textColor = [UIColor colorWithWhite:25.0f/255.0f alpha:1.0f];
     [nameField addTarget:self action:@selector(textFieldChanged) forControlEvents:UIControlEventEditingChanged];
@@ -56,7 +56,7 @@
     passField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     passField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     passField.backgroundColor = [UIColor whiteColor];
-    passField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
+    passField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
     passField.textAlignment = NSTextAlignmentCenter;
     passField.textColor = [UIColor colorWithWhite:25.0f/255.0f alpha:1.0f];
     [passField addTarget:self action:@selector(textFieldChanged) forControlEvents:UIControlEventEditingChanged];
@@ -68,7 +68,7 @@
     loginButton.frame = CGRectMake(10.0f, 260.0f, self.view.frame.size.width-20.0f, 50.0f);
     loginButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     loginButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
+    loginButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0f];
     [loginButton setTitle:@"Sign in" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
@@ -81,7 +81,11 @@
 {
     if(nameField.text.length != 0 && passField.text.length != 0) {
         loginButton.enabled = YES;
-        [loginButton setBackgroundColor:[UIColor colorWithRed:(43.0f/255.0f) green:(216.0f/255.0f) blue:(252.0f/255.0f) alpha:1.0f]];
+        [loginButton setBackgroundColor:[UIColor colorWithRed:(0.0f/255.0f) green:(153.0f/255.0f) blue:(255.0f/255.0f) alpha:1.0f]];
+    } else if(nameField.text.length == 0 || passField.text.length == 0) {
+        loginButton.enabled = NO;
+        [loginButton setBackgroundColor:[UIColor colorWithWhite:(100.0f/255.0f) alpha:1.0f]];
+        
     }
 }
 
