@@ -12,6 +12,7 @@
 #import <sys/utsname.h>
 #import "UAGithubEngine.h"
 #import "SBIssueViewController.h"
+#import "SBLoginViewController.h"
 
 @implementation SBWindow
 @synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody,
@@ -50,7 +51,12 @@
     if(buttonIndex == 0) {
         [self showEmailView];
     } else if (buttonIndex == 1) {
-        UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden" password:@"3LOFuWw1" withReachability:YES];
+        
+        SBLoginViewController *loginViewController = [[SBLoginViewController alloc] init];
+        [self.rootViewController presentViewController:loginViewController animated:YES completion:nil];
+        
+        /*
+        UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden@gmail.com" password:@"3LOFuWw1" withReachability:YES];
         [engine repository:_repositoryName success:^(id response) {
             SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
             issueView.repository = [response objectAtIndex:0];
@@ -60,6 +66,8 @@
         } failure:^(NSError *error) {
             NSLog(@"Request failed with error: %@", error);
         }];
+         */
+         
         
     }
 }
