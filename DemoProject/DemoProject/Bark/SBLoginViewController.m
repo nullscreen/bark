@@ -13,8 +13,15 @@
     UITextField *nameField;
     UITextField *passField;
     UIButton *loginButton;
+    CGFloat animatedDistance;
 }
 @end
+
+static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
+static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
+static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
+static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
+static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 @implementation SBLoginViewController
 
@@ -41,6 +48,7 @@
     nameField.placeholder = @"Username or Email";
     nameField.autocorrectionType = UITextAutocorrectionTypeNo;
     nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    nameField.returnKeyType = UIReturnKeyDone;
     nameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     nameField.backgroundColor = [UIColor whiteColor];
     nameField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
@@ -52,6 +60,7 @@
     passField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 200.0f, self.view.frame.size.width-20, 50.0f)];
     passField.delegate = self;
     passField.placeholder = @"Password";
+    passField.returnKeyType = UIReturnKeyDone;
     passField.autocorrectionType = UITextAutocorrectionTypeNo;
     passField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     passField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -77,6 +86,68 @@
     
 }
 
+- (void)login
+{
+    NSLog(@"login");
+    
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if([[UIScreen mainScreen] bounds].size.height != 568.0f) {
+        CGRect textFieldRect = [self.view.window convertRect:textField.bounds fromView:textField];
+        CGRect viewRect = [self.view.window convertRect:self.view.bounds fromView:self.view];
+        CGFloat midline = textFieldRect.origin.y + 0.5 * textFieldRect.size.height;
+        CGFloat numerator = midline - viewRect.origin.y - MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+        CGFloat denominator = (MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION) * viewRect.size.height;
+        CGFloat heightFraction = numerator / denominator;
+        
+        if (heightFraction < 0.0) {
+            heightFraction = 0.0;
+        } else if (heightFraction > 1.0) {
+            heightFraction = 1.0;
+        }
+        
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
+            animatedDistance = floor(PORTRAIT_KEYBOARD_HEIGHT * heightFraction);
+        } else {
+            animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
+        }
+        
+        CGRect viewFrame = self.view.frame;
+        viewFrame.origin.y -= animatedDistance;
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+        
+        [self.view setFrame:viewFrame];
+        [UIView commitAnimations];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if([[UIScreen mainScreen] bounds].size.height != 568.0f) {
+        CGRect viewFrame = self.view.frame;
+        viewFrame.origin.y += animatedDistance;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+        [self.view setFrame:viewFrame];
+        [UIView commitAnimations];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (void)textFieldChanged
 {
     if(nameField.text.length != 0 && passField.text.length != 0) {
@@ -87,12 +158,6 @@
         [loginButton setBackgroundColor:[UIColor colorWithWhite:(100.0f/255.0f) alpha:1.0f]];
         
     }
-}
-
-- (void)login
-{
-    NSLog(@"login");
-    
 }
 
 - (void)didReceiveMemoryWarning
