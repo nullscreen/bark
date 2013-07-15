@@ -102,8 +102,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
 }
 
-
-
 - (void)login
 {
     UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:nameField.text password:passField.text withReachability:YES];

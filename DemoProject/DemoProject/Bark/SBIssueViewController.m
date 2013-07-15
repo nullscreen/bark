@@ -231,11 +231,11 @@
     if(![bodyField.text isEqualToString:@"Leave a comment..."] && ![bodyField.text isEqualToString:@""]) {[_issueDictionary setObject:bodyField.text forKey:@"body"];}
     if(selectedLabels.count > 0) { [_issueDictionary setObject:selectedLabels forKey:@"labels"]; }
     
-    NSLog(@"%@", _issueDictionary);
-    
+    __weak typeof(self) weakSelf = self;
     [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
     [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
         [button setTitle:@"Success!" forState:UIControlStateNormal];
+        [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSError *error) {
         NSLog(@"error");
     }];
