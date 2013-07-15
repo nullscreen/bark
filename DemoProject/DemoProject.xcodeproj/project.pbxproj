@@ -25,6 +25,7 @@
 		8907B6131790CF1A009387E1 /* github_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907B6111790CF1A009387E1 /* github_logo.png */; };
 		8907B6141790CF1A009387E1 /* github_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907B6121790CF1A009387E1 /* github_logo@2x.png */; };
 		89260E58178B986900BE15EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89260E57178B986900BE15EA /* SystemConfiguration.framework */; };
+		892F876B17946ABB00FB1249 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 892F876A17946ABB00FB1249 /* UICKeyChainStore.m */; };
 		89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292B81784C5D3009DD393 /* UIKit.framework */; };
 		89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BC1784C5D3009DD393 /* CoreGraphics.framework */; };
@@ -87,6 +88,8 @@
 		8907B6111790CF1A009387E1 /* github_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github_logo.png; sourceTree = "<group>"; };
 		8907B6121790CF1A009387E1 /* github_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "github_logo@2x.png"; sourceTree = "<group>"; };
 		89260E57178B986900BE15EA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		892F876917946ABB00FB1249 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		892F876A17946ABB00FB1249 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		89F292B51784C5D3009DD393 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F292B81784C5D3009DD393 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		89F292BA1784C5D3009DD393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -148,6 +151,7 @@
 				8907B5E31790AFE2009387E1 /* SBWindow.m */,
 				8907B6111790CF1A009387E1 /* github_logo.png */,
 				8907B6121790CF1A009387E1 /* github_logo@2x.png */,
+				892F876817946ABB00FB1249 /* UICKeyChainStore */,
 				8907B5E41790AFE2009387E1 /* UAGitHubEngine */,
 			);
 			path = Bark;
@@ -182,6 +186,15 @@
 				8907B5FD1790AFE2009387E1 /* UAReachability.m */,
 			);
 			path = UAGitHubEngine;
+			sourceTree = "<group>";
+		};
+		892F876817946ABB00FB1249 /* UICKeyChainStore */ = {
+			isa = PBXGroup;
+			children = (
+				892F876917946ABB00FB1249 /* UICKeyChainStore.h */,
+				892F876A17946ABB00FB1249 /* UICKeyChainStore.m */,
+			);
+			path = UICKeyChainStore;
 			sourceTree = "<group>";
 		};
 		89F292AC1784C5D3009DD393 = {
@@ -392,6 +405,7 @@
 				8907B60A1790AFE2009387E1 /* UAGithubURLConnection.m in Sources */,
 				8907B60B1790AFE2009387E1 /* UAReachability.m in Sources */,
 				8907B60E1790B942009387E1 /* SBLoginViewController.m in Sources */,
+				892F876B17946ABB00FB1249 /* UICKeyChainStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
