@@ -82,7 +82,8 @@
         } else {
             SBLoginViewController *loginViewController = [[SBLoginViewController alloc] init];
             loginViewController.repositoryName = _repositoryName;
-            [currentViewController presentViewController:loginViewController animated:YES completion:nil];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+            [currentViewController presentViewController:navController animated:YES completion:nil];
         }
     }
 }

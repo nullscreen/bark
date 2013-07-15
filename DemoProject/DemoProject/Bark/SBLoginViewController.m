@@ -43,6 +43,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 {
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor colorWithWhite:(249.0f/255.0f) alpha:1.0f];
+    self.navigationController.navigationBar.hidden = YES;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"github_logo.png"]];
     imageView.frame = CGRectMake(CGRectGetMidX(self.view.bounds) - CGRectGetMidX(imageView.bounds),40.0f, 175.0f, 47.0f);
@@ -89,19 +90,30 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     loginButton.enabled = NO;
     [self.view addSubview:loginButton];
     
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelButton.frame = CGRectMake(self.view.frame.size.width-50.0f, 5.0f, 50, 30.0f);
+    cancelButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
+    [cancelButton setTitle:@"Close" forState:UIControlStateNormal];
+    [cancelButton setTitleColor:[UIColor colorWithWhite:(100.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(cancelPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cancelButton];
+    
 }
+
+
 
 - (void)login
 {
     UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:nameField.text password:passField.text withReachability:YES];
     [engine repository:_repositoryName success:^(id response) {
-        [UICKeyChainStore setString:nameField.text forKey:@"username"];
-        [UICKeyChainStore setString:passField.text forKey:@"password"];
+        //[UICKeyChainStore setString:nameField.text forKey:@"username"];
+        //[UICKeyChainStore setString:passField.text forKey:@"password"];
         SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
         issueView.repository = [response objectAtIndex:0];
         issueView.engine = engine;
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
-        [self presentViewController:navController animated:YES completion:nil];
+        [self.navigationController pushViewController:issueView animated:YES];
     } failure:^(NSError *error) {
         UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                  message:@"Invalid User Credentials"
@@ -111,6 +123,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [loginAlertView show];
     }];
     
+}
+
+- (void)cancelPressed
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate
