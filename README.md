@@ -7,7 +7,10 @@ Bark is a simple, in-app issue reporting library for iOS. By default, shaking th
 ## Get Started ##
 
 1. Clone the repository with `git clone git@github.com:austinlouden/ALReporter.git`
-2. Link the `MessageUI` and `SystemConfiguration` frameworks in the Build Phases tab.
+2. Link the following frameworks in the Build Phases tab: 
+    - `MessageUI` to send emails from within the app
+    - `SystemConfiguration` for network reachability support
+    - `Security` for secure storage of GitHub credentials
 3. In your AppDelegate, `#import "SBWindow.h`
 4. Set `self.window` equal to the SBWindow subclass.
 
