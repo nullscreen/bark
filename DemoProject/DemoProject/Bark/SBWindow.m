@@ -53,6 +53,7 @@
     } else if (buttonIndex == 1) {
         
         SBLoginViewController *loginViewController = [[SBLoginViewController alloc] init];
+        loginViewController.repositoryName = _repositoryName;
         [self.rootViewController presentViewController:loginViewController animated:YES completion:nil];
         
         /*

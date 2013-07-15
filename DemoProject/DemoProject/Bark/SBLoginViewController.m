@@ -7,6 +7,9 @@
 //
 
 #import "SBLoginViewController.h"
+#import "UAGithubEngine.h"
+#import "SBWindow.h"
+#import "SBIssueViewController.h"
 
 @interface SBLoginViewController ()
 {
@@ -24,6 +27,7 @@ static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 @implementation SBLoginViewController
+@synthesize repositoryName = _repositoryName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,7 +92,21 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)login
 {
-    NSLog(@"login");
+    UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden@gmail.com" password:@"3LOFuWw1" withReachability:YES];
+    [engine repository:_repositoryName success:^(id response) {
+        SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
+        issueView.repository = [response objectAtIndex:0];
+        issueView.engine = engine;
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
+        [self presentViewController:navController animated:YES completion:nil];
+    } failure:^(NSError *error) {
+        UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                 message:@"Invalid User Credentials"
+                                                                delegate:self
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"OK", nil];
+        [loginAlertView show];
+    }];
     
 }
 

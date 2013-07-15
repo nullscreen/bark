@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SBLoginViewController : UIViewController <UITextFieldDelegate>
-
+@property (nonatomic, strong) NSString *repositoryName;
 @end
