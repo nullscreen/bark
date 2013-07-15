@@ -13,6 +13,7 @@
 #import "UAGithubEngine.h"
 #import "SBIssueViewController.h"
 #import "SBLoginViewController.h"
+#import "UICKeyChainStore.h"
 
 @implementation SBWindow
 @synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody,
@@ -51,25 +52,25 @@
     if(buttonIndex == 0) {
         [self showEmailView];
     } else if (buttonIndex == 1) {
-        
-        SBLoginViewController *loginViewController = [[SBLoginViewController alloc] init];
-        loginViewController.repositoryName = _repositoryName;
-        [self.rootViewController presentViewController:loginViewController animated:YES completion:nil];
-        
-        /*
-        UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden@gmail.com" password:@"3LOFuWw1" withReachability:YES];
-        [engine repository:_repositoryName success:^(id response) {
-            SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
-            issueView.repository = [response objectAtIndex:0];
-            issueView.engine = engine;
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
-            [self.rootViewController presentViewController:navController animated:YES completion:nil];
-        } failure:^(NSError *error) {
-            NSLog(@"Request failed with error: %@", error);
-        }];
-         */
-         
-        
+        if([UICKeyChainStore stringForKey:@"username"]) {
+            UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:[UICKeyChainStore stringForKey:@"username"]
+                                                                     password:[UICKeyChainStore stringForKey:@"password"]
+                                                             withReachability:YES];
+            
+            [engine repository:_repositoryName success:^(id response) {
+                SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
+                issueView.repository = [response objectAtIndex:0];
+                issueView.engine = engine;
+                UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
+                [self.rootViewController presentViewController:navController animated:YES completion:nil];
+            } failure:^(NSError *error) {
+                NSLog(@"Request failed with error: %@", error);
+            }];
+        } else {
+            SBLoginViewController *loginViewController = [[SBLoginViewController alloc] init];
+            loginViewController.repositoryName = _repositoryName;
+            [self.rootViewController presentViewController:loginViewController animated:YES completion:nil];
+        }
     }
 }
 

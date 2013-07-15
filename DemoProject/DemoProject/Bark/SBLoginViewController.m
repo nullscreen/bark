@@ -10,6 +10,7 @@
 #import "UAGithubEngine.h"
 #import "SBWindow.h"
 #import "SBIssueViewController.h"
+#import "UICKeyChainStore.h"
 
 @interface SBLoginViewController ()
 {
@@ -92,8 +93,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)login
 {
-    UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"austinlouden@gmail.com" password:@"3LOFuWw1" withReachability:YES];
+    UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:nameField.text password:passField.text withReachability:YES];
     [engine repository:_repositoryName success:^(id response) {
+        [UICKeyChainStore setString:nameField.text forKey:@"username"];
+        [UICKeyChainStore setString:passField.text forKey:@"password"];
         SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
         issueView.repository = [response objectAtIndex:0];
         issueView.engine = engine;

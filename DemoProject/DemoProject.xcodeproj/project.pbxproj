@@ -26,6 +26,7 @@
 		8907B6141790CF1A009387E1 /* github_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8907B6121790CF1A009387E1 /* github_logo@2x.png */; };
 		89260E58178B986900BE15EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89260E57178B986900BE15EA /* SystemConfiguration.framework */; };
 		892F876B17946ABB00FB1249 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 892F876A17946ABB00FB1249 /* UICKeyChainStore.m */; };
+		892F876D17946E2200FB1249 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892F876C17946E2200FB1249 /* Security.framework */; };
 		89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292B81784C5D3009DD393 /* UIKit.framework */; };
 		89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BC1784C5D3009DD393 /* CoreGraphics.framework */; };
@@ -90,6 +91,7 @@
 		89260E57178B986900BE15EA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		892F876917946ABB00FB1249 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
 		892F876A17946ABB00FB1249 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		892F876C17946E2200FB1249 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		89F292B51784C5D3009DD393 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F292B81784C5D3009DD393 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		89F292BA1784C5D3009DD393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				892F876D17946E2200FB1249 /* Security.framework in Frameworks */,
 				89260E58178B986900BE15EA /* SystemConfiguration.framework in Frameworks */,
 				89F292F51784EC33009DD393 /* MessageUI.framework in Frameworks */,
 				89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */,
@@ -219,6 +222,7 @@
 		89F292B71784C5D3009DD393 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				892F876C17946E2200FB1249 /* Security.framework */,
 				89260E57178B986900BE15EA /* SystemConfiguration.framework */,
 				89F292F41784EC33009DD393 /* MessageUI.framework */,
 				89F292B81784C5D3009DD393 /* UIKit.framework */,
