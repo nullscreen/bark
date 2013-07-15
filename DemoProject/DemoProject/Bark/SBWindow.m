@@ -49,6 +49,19 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    UIViewController *currentViewController;
+    
+    if ([self.rootViewController isKindOfClass:[UINavigationController class]]) {
+        currentViewController = [(UINavigationController *)self.rootViewController topViewController];
+    } else if([self.rootViewController isKindOfClass:[UITabBarController class]]) {
+        currentViewController = [(UITabBarController *)self.rootViewController selectedViewController];
+    } else if ([self.rootViewController presentedViewController]) {
+        currentViewController = [self.rootViewController presentedViewController];
+    } else {
+        currentViewController = self.rootViewController;
+    }
+
+
     if(buttonIndex == 0) {
         [self showEmailView];
     } else if (buttonIndex == 1) {
@@ -62,14 +75,14 @@
                 issueView.repository = [response objectAtIndex:0];
                 issueView.engine = engine;
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
-                [self.rootViewController presentViewController:navController animated:YES completion:nil];
+                [currentViewController presentViewController:navController animated:YES completion:nil];
             } failure:^(NSError *error) {
                 NSLog(@"Request failed with error: %@", error);
             }];
         } else {
             SBLoginViewController *loginViewController = [[SBLoginViewController alloc] init];
             loginViewController.repositoryName = _repositoryName;
-            [self.rootViewController presentViewController:loginViewController animated:YES completion:nil];
+            [currentViewController presentViewController:loginViewController animated:YES completion:nil];
         }
     }
 }
