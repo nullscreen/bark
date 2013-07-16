@@ -5,8 +5,8 @@
 Bark is a simple, in-app issue reporting library for iOS. By default, shaking the app pulls up an action sheet, where beta testers can instantly send an email or create an issue on GitHub. Log in with GitHub to quickly create issues, or send emails with screenshots and system information.
 
 <p align="center">
-<img src="http://i.imgur.com/Tge4KbW.png" alt="action sheet" title="action sheet">
-<img src="http://i.imgur.com/w7ndNWX.png" alt="issue view" title="issue view">
+<img src="http://i.imgur.com/Tge4KbW.png" alt="action sheet" title="action sheet" width="300" height="564">
+<img src="http://i.imgur.com/w7ndNWX.png" alt="issue view" title="issue view" width="300" height="564">
 </p>
 ## Get Started ##
 
