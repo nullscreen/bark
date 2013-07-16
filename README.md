@@ -2,8 +2,7 @@
   <img src="http://i.imgur.com/fkR8t4g.png" alt="BARK" title="BARK">
 </p>
 
-Bark is a simple, in-app issue reporting library for iOS. By default, shaking the app pulls up an action sheet, where beta testers can instantly send an email or create an issue on GitHub. Log in with GitHub to quickly create issues, or send emails with screenshots and system information.
-
+Bark is a simple, in-app issue reporting library for iOS. Shaking the app pulls up an action sheet, where beta users can instantly send email or create GitHub issues.
 <p align="center">
 <img src="http://i.imgur.com/Tge4KbW.png" alt="action sheet" title="action sheet" width="300" height="564">
 <img src="http://i.imgur.com/w7ndNWX.png" alt="issue view" title="issue view" width="300" height="564">
