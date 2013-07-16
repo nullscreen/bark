@@ -15,9 +15,10 @@ Bark is a simple, in-app issue reporting library for iOS. Shaking the app pulls 
     - `SystemConfiguration` -  for network reachability support
     - `Security` - for secure storage of GitHub credentials
 3. In your `AppDelegate.m`, `#import "SBWindow.h"`
-4. Finally, set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `window.repositoryName` equal to the name of
+4. Finally, set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `window.repositoryName` to the name of the repository you want to submit issues to.
 
 ```objc
+// an example applicationdidFinishLaunchingWithOptions method
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -36,7 +37,23 @@ Bark is a simple, in-app issue reporting library for iOS. Shaking the app pulls 
 
 ## Features ##
 
-BARK comes with a few features to make quick adjustments without forking the library.
+BARK comes with some small features to make quick adjustments. You can set these below `repositoryName` on the window object.
+
+```objc
+// email
+window.emailRecipients = @[@"hi@stagebloc.com", @"ratchet@stagebloc.com"];
+window.emailSubject = @"Subject";
+window.emailBody = @"Body"; // note that this will override sending device info
+window.attachScreenshot = YES; // defaults to YES
+
+// github
+window.defaultAssignee = @"austinlouden";
+window.defaultMilestone = @"1.0";
+```
+
+### Coming Soon ###
+
+Submitting images through the GitHub API is currently unsupported. We'll have a workaround soon.
 
 ## License ##
 
