@@ -14,12 +14,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // create an instance of the SBWindow subclass and set the repository name
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     window.repositoryName = @"stagebloc/bark";
-    window.defaultAssignee = @"gregipp";
-    window.defaultMilestone = @"0.1";
+    
+    /* optional settings
+     // email
+     window.emailRecipients = @[@"hi@stagebloc.com", @"ratchet@stagebloc.com"];
+     window.emailSubject = @"Subject";
+     window.emailBody = @"Body"; // note that this will override sending device info
+     window.attachScreenshot = YES; // defaults to YES
+     
+     // github
+     window.defaultAssignee = @"austinlouden";
+     window.defaultMilestone = @"1.0";
+     */
     
     self.window = window;
+    
     // Override point for customization after application launch.
     SBRootViewController *rootViewController = [[SBRootViewController alloc] init];
     self.window.rootViewController = rootViewController;

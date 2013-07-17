@@ -29,8 +29,9 @@
 	// Do any additional setup after loading the view.
     
     UILabel *shakeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height/2.0f, self.view.frame.size.width, 100.0f)];
+    shakeLabel.numberOfLines = 2;
     shakeLabel.textAlignment =  NSTextAlignmentCenter;
-    shakeLabel.text = @"Shake me!";
+    shakeLabel.text = @"Shake me!\n(ctrl+cmd+z on the simulator)";
     [self.view addSubview:shakeLabel];
 }
 

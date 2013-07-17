@@ -149,7 +149,7 @@ NSString* machineName()
                               encoding:NSUTF8StringEncoding];
     NSString *deviceString = @"Unknown";
     
-    // why is there no switch(NSString) in ObjC
+    // still waiting on switch(NSString) in ObjC
     if([device isEqualToString:@"x86_64"]) {
         return @"iPhone Simulator";
     } else if([device isEqualToString:@"iPod1,1"]) {
@@ -160,7 +160,9 @@ NSString* machineName()
         return @"iPod Touch Third Generation";
     } else if([device isEqualToString:@"iPod4,1"]) {
         return @"iPod Touch Fourth Generation";
-    } else if([device isEqualToString:@"iPhone1,1"]) {
+    } else if([device isEqualToString:@"iPod5,1"]) {
+        return @"iPod Touch Fifth Generation";
+    }else if([device isEqualToString:@"iPhone1,1"]) {
         return @"iPhone";
     } else if([device isEqualToString:@"iPhone1,2"]) {
         return @"iPhone 3G";

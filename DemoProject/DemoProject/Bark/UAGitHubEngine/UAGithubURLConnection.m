@@ -21,7 +21,7 @@
 
         @autoreleasepool 
         {    
-            NSLog(@"New %@ connection: %@", request.HTTPMethod, request);
+            //NSLog(@"New %@ connection: %@", request.HTTPMethod, request);
 
             NSURLResponse *response = nil;
             NSError *error = nil;
@@ -44,7 +44,7 @@
     
     @autoreleasepool 
     {    
-        NSLog(@"New %@ connection: %@", request.HTTPMethod, request);
+        //NSLog(@"New %@ connection: %@", request.HTTPMethod, request);
         
         NSURLResponse *response = nil;
         NSError *connectionError = nil;

@@ -29,7 +29,8 @@
 @end
 
 @implementation SBIssueViewController
-@synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary, labels = _labels, asignees = _asignees, milestones = _milestones;
+@synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary,
+            labels = _labels, asignees = _asignees, milestones = _milestones;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -166,7 +167,6 @@
 
 - (void)getRepoData
 {
-    
     [_engine labelsForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
         _labels = response;
         [self setupLabels];
@@ -180,7 +180,6 @@
         [pickerView reloadAllComponents];
         
         if(_defaultAssignee) {
-            NSLog(@"here %@", _defaultAssignee);
             for(int i=0; i<_asignees.count; i++) {
                 if([_defaultAssignee isEqualToString:[[_asignees objectAtIndex:i] objectForKey:@"login"]]) {
                     [pickerView selectRow:i+1 inComponent:0 animated:NO];
@@ -199,13 +198,10 @@
         [pickerView reloadAllComponents];
         
         if(_defaultMilestone) {
-            NSLog(@"here %@", _defaultMilestone);
-            NSLog(@"%@", _milestones);
             for(int i=0; i<_milestones.count; i++) {
                 if([_defaultMilestone isEqualToString:[[_milestones objectAtIndex:i] objectForKey:@"title"]]) {
                     [pickerView selectRow:i+1 inComponent:0 animated:NO];
                     [self pickerView:pickerView didSelectRow:i+1 inComponent:0];
-                    NSLog(@"row %d", [pickerView selectedRowInComponent:0]);
                 }
             }
         }
@@ -283,7 +279,6 @@
     }];
     
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -404,7 +399,6 @@
     [cell.contentView sendSubviewToBack:alphaView];
     
     [selectedLabels addObject:[label objectForKey:@"name"]];
-    NSLog(@"%@", selectedLabels);
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -420,7 +414,6 @@
     }
     
     [selectedLabels removeObject:cell.textLabel.text];
-    NSLog(@"%@", selectedLabels);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
