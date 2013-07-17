@@ -37,7 +37,7 @@ Bark is a simple, in-app issue reporting library for iOS. Shaking the app pulls 
 
 ## Features ##
 
-BARK comes with some small features to make quick adjustments. You can set these below `repositoryName` on the window object.
+BARK comes with a set of features to make quick adjustments. You can set these below `repositoryName` on the window object.
 
 ```objc
 // email
@@ -53,7 +53,7 @@ window.defaultMilestone = @"1.0";
 
 ### Coming Soon ###
 
-Submitting images through the GitHub API is currently unsupported. We'll have a workaround soon.
+Submitting images through the GitHub API is currently unsupported. We're planning to build a workaround to make this possible, so you'll soon be able to attach screenshots to GitHub issues as well.
 
 ## License ##
 
