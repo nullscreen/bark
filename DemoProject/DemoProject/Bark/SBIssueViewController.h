@@ -16,4 +16,7 @@
 @property (nonatomic, strong) NSArray *asignees;
 @property (nonatomic, strong) NSArray *milestones;
 @property (nonatomic, strong) NSMutableDictionary *issueDictionary;
+@property (nonatomic, strong) NSString *defaultAssignee;
+@property (nonatomic, strong) NSString *defaultMilestone;
+- (id)initWithAssignee:(NSString*)assignee milestone:(NSString*)milestone;
 @end

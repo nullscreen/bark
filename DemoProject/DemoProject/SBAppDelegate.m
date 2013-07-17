@@ -16,6 +16,8 @@
 {
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     window.repositoryName = @"stagebloc/bark";
+    window.defaultAssignee = @"gregipp";
+    window.defaultMilestone = @"0.1";
     
     self.window = window;
     // Override point for customization after application launch.

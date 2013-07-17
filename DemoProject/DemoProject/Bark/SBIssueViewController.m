@@ -40,11 +40,22 @@
     return self;
 }
 
+- (id)initWithAssignee:(NSString*)assignee milestone:(NSString*)milestone
+{
+    self = [super init];
+    if(self) {
+        _defaultAssignee = assignee;
+        _defaultMilestone = milestone;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden =  YES;
     self.view.backgroundColor = [UIColor colorWithWhite:(245.0f/255.0f) alpha:1.0f];
+    
     [self setupUI];
     [self getRepoData];
     
@@ -52,12 +63,6 @@
     recognizer.delegate = self;
     recognizer.enabled = NO;
     [self.view addGestureRecognizer:recognizer];
-    
-    pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 216)];
-    pickerView.delegate = self;
-    pickerView.dataSource = self;
-    pickerView.showsSelectionIndicator = YES;
-    [self.view addSubview:pickerView];
     
     selectedLabels = [NSMutableArray array];
 }
@@ -151,10 +156,17 @@
     tableView.allowsMultipleSelection = YES;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
+    
+    pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 216)];
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    pickerView.showsSelectionIndicator = YES;
+    [self.view addSubview:pickerView];
 }
 
 - (void)getRepoData
 {
+    
     [_engine labelsForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
         _labels = response;
         [self setupLabels];
@@ -164,12 +176,40 @@
     
     [_engine assigneesForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
         _asignees = response;
+        showingAssignees = YES;
+        [pickerView reloadAllComponents];
+        
+        if(_defaultAssignee) {
+            NSLog(@"here %@", _defaultAssignee);
+            for(int i=0; i<_asignees.count; i++) {
+                if([_defaultAssignee isEqualToString:[[_asignees objectAtIndex:i] objectForKey:@"login"]]) {
+                    [pickerView selectRow:i+1 inComponent:0 animated:NO];
+                    [self pickerView:pickerView didSelectRow:i+1 inComponent:0];
+                }
+            }
+        }
+        
     } failure:^(NSError *error) {
         NSLog(@"Request failed with error %@", error);
     }];
     
     [_engine milestonesForRepository:[_repository objectForKey:@"full_name"] success:^(id response) {
         _milestones = response;
+        showingAssignees = NO;
+        [pickerView reloadAllComponents];
+        
+        if(_defaultMilestone) {
+            NSLog(@"here %@", _defaultMilestone);
+            NSLog(@"%@", _milestones);
+            for(int i=0; i<_milestones.count; i++) {
+                if([_defaultMilestone isEqualToString:[[_milestones objectAtIndex:i] objectForKey:@"title"]]) {
+                    [pickerView selectRow:i+1 inComponent:0 animated:NO];
+                    [self pickerView:pickerView didSelectRow:i+1 inComponent:0];
+                    NSLog(@"row %d", [pickerView selectedRowInComponent:0]);
+                }
+            }
+        }
+        
     } failure:^(NSError *error) {
         NSLog(@"Request failed with error %@", error);
     }];
@@ -183,6 +223,7 @@
     showingAssignees = YES;
     recognizer.enabled = YES;
     [pickerView reloadAllComponents];
+    
     [UIView beginAnimations: nil context: NULL];
     [UIView setAnimationDuration: 0.3];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
@@ -196,6 +237,7 @@
     showingAssignees = NO;
     recognizer.enabled = YES;
     [pickerView reloadAllComponents];
+    
     [UIView beginAnimations: nil context: NULL];
     [UIView setAnimationDuration: 0.3];
     [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
@@ -210,8 +252,8 @@
 
 - (void)createIssuePressed:(UIButton *)button
 {
-    //self.view.userInteractionEnabled = NO;
-
+    self.view.userInteractionEnabled = NO;
+    
     _issueDictionary = [NSMutableDictionary dictionary];
     if(![titleField.text isEqualToString:@"Title"] && ![titleField.text isEqualToString:@""]) { [_issueDictionary setObject:titleField.text forKey:@"title"]; }
     else {

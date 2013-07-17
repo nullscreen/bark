@@ -28,7 +28,7 @@ static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 @implementation SBLoginViewController
-@synthesize repositoryName = _repositoryName;
+@synthesize repositoryName = _repositoryName, defaultMilestone = _defaultMilestone, defaultAssignee = _defaultAssignee;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -106,9 +106,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 {
     UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:nameField.text password:passField.text withReachability:YES];
     [engine repository:_repositoryName success:^(id response) {
-        //[UICKeyChainStore setString:nameField.text forKey:@"username"];
-        //[UICKeyChainStore setString:passField.text forKey:@"password"];
-        SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
+        [UICKeyChainStore setString:nameField.text forKey:@"username"];
+        [UICKeyChainStore setString:passField.text forKey:@"password"];
+        SBIssueViewController *issueView = [[SBIssueViewController alloc] initWithAssignee:_defaultAssignee milestone:_defaultMilestone];
         issueView.repository = [response objectAtIndex:0];
         issueView.engine = engine;
         [self.navigationController pushViewController:issueView animated:YES];

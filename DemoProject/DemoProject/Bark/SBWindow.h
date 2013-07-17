@@ -15,4 +15,6 @@
 @property (nonatomic, strong) NSString *emailSubject;
 @property (nonatomic, strong) NSString *emailBody;
 @property BOOL attachScreenshot;
+@property (nonatomic, strong) NSString *defaultAssignee;
+@property (nonatomic, strong) NSString *defaultMilestone;
 @end

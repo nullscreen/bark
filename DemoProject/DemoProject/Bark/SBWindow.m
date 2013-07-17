@@ -17,7 +17,8 @@
 
 @implementation SBWindow
 @synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody,
-            attachScreenshot = _attachScreenshot, repositoryName = _repositoryName;
+            attachScreenshot = _attachScreenshot, repositoryName = _repositoryName,
+            defaultAssignee = _defaultAssignee, defaultMilestone = _defaultMilestone;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -71,7 +72,7 @@
                                                              withReachability:YES];
             
             [engine repository:_repositoryName success:^(id response) {
-                SBIssueViewController *issueView = [[SBIssueViewController alloc] init];
+                SBIssueViewController *issueView = [[SBIssueViewController alloc] initWithAssignee:_defaultAssignee milestone:_defaultMilestone];
                 issueView.repository = [response objectAtIndex:0];
                 issueView.engine = engine;
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
@@ -82,6 +83,8 @@
         } else {
             SBLoginViewController *loginViewController = [[SBLoginViewController alloc] init];
             loginViewController.repositoryName = _repositoryName;
+            loginViewController.defaultAssignee = _defaultAssignee;
+            loginViewController.defaultMilestone  = _defaultMilestone;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
             [currentViewController presentViewController:navController animated:YES completion:nil];
         }
