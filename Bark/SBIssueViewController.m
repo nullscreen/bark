@@ -100,6 +100,7 @@
     titleField.text = @"Title";
     titleField.delegate = self;
     titleField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    titleField.returnKeyType = UIReturnKeyDone;
     titleField.backgroundColor = [UIColor colorWithRed:(59.0f/255.0f) green:(123.0f/255.0f) blue:(191.0f/255.0f) alpha:1.0f];
     titleField.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
     titleField.textAlignment = NSTextAlignmentCenter;
@@ -264,6 +265,14 @@
         return;
     }
     
+    UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    aiView.frame = CGRectMake(100.0f, self.view.frame.size.height-25.0f, 0.0f, 0.0f);
+    aiView.hidesWhenStopped = YES;
+    [self.view addSubview:aiView];
+    
+    [aiView startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
     if(selectedAssignee) { [_issueDictionary setObject:selectedAssignee forKey:@"assignee"]; }
     if(selectedMilestone) { [_issueDictionary setObject:selectedMilestone forKey:@"milestone"]; }
     if(![bodyField.text isEqualToString:@"Leave a comment..."] && ![bodyField.text isEqualToString:@""]) {[_issueDictionary setObject:bodyField.text forKey:@"body"];}
@@ -272,12 +281,13 @@
     __weak typeof(self) weakSelf = self;
     [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
     [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [aiView stopAnimating];
         [button setTitle:@"Success!" forState:UIControlStateNormal];
-        [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf performSelector:@selector(cancelPressed) withObject:nil afterDelay:1.0f];
     } failure:^(NSError *error) {
         NSLog(@"error");
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -295,6 +305,12 @@
     if([textField.text isEqualToString:@"Title"]) {
         textField.text = @"";
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark - UITextViewDelegate
