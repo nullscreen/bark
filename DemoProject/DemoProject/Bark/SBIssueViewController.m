@@ -8,6 +8,7 @@
 
 #import "SBIssueViewController.h"
 #import "UAGithubEngine.h"
+#import "UICKeyChainStore.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define ASSIGN_BUTTON_TAG 1
@@ -140,7 +141,7 @@
     
     UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [createIssueButton setBackgroundColor:[UIColor colorWithRed:(30.0f/255.0f) green:(30.0f/255.0f) blue:(34.0f/255.0f) alpha:1.0f]];
-    createIssueButton.frame = CGRectMake(0.0f, self.view.frame.size.height-50.0f, self.view.frame.size.width, 50.0f);
+    createIssueButton.frame = CGRectMake(0.0f, self.view.frame.size.height-50.0f, self.view.frame.size.width-50.0f, 50.0f);
     createIssueButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     createIssueButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     createIssueButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
@@ -148,6 +149,18 @@
     [createIssueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [createIssueButton addTarget:self action:@selector(createIssuePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:createIssueButton];
+    
+    UIButton *logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [logoutButton setBackgroundColor:[UIColor redColor]];
+    logoutButton.frame = CGRectMake(self.view.frame.size.width-50.0f, self.view.frame.size.height-50.0f, 50.0f, 50.0f);
+    logoutButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    logoutButton.titleLabel.numberOfLines = 2;
+    logoutButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    logoutButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+    [logoutButton setTitle:@"Sign\nout" forState:UIControlStateNormal];
+    [logoutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [logoutButton addTarget:self action:@selector(logoutPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:logoutButton];
 }
 
 - (void)setupLabels
@@ -244,6 +257,12 @@
 
 - (void)cancelPressed
 {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)logoutPressed
+{
+    [UICKeyChainStore removeAllItems];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
