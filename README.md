@@ -2,7 +2,7 @@
   <img src="http://i.imgur.com/fkR8t4g.png" alt="BARK" title="BARK">
 </p>
 
-Bark is a simple, in-app issue reporting library for iOS. Shaking the app pulls up an action sheet, where beta users can instantly send email or create GitHub issues.
+BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for iOS. Shaking the app pulls up an action sheet, where beta users can instantly send email or create GitHub issues.
 <p align="center">
 <img src="http://i.imgur.com/Tge4KbW.png" alt="action sheet" title="action sheet" width="300" height="564">
 <img src="http://i.imgur.com/w7ndNWX.png" alt="issue view" title="issue view" width="300" height="564">
@@ -47,8 +47,8 @@ window.emailBody = @"Body"; // note that this will override sending device info
 window.attachScreenshot = YES; // defaults to YES
 
 // github
-window.defaultAssignee = @"austinlouden";
-window.defaultMilestone = @"1.0";
+window.defaultAssignee = @"your_username";
+window.defaultMilestone = @"milestone_title";
 ```
 
 ### Coming Soon ###
