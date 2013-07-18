@@ -91,12 +91,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.view addSubview:loginButton];
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.frame = CGRectMake(self.view.frame.size.width-50.0f, 5.0f, 50, 30.0f);
+    cancelButton.frame = CGRectMake(self.view.frame.size.width-38.0f, 5.0f, 50, 30.0f);
     cancelButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
-    [cancelButton setTitle:@"Close" forState:UIControlStateNormal];
-    [cancelButton setTitleColor:[UIColor colorWithWhite:(100.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+    cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20.0f];
+    [cancelButton setTitle:@"X" forState:UIControlStateNormal];
+    [cancelButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(cancelPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelButton];
     

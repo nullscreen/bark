@@ -80,7 +80,7 @@
     createLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
     [self.view addSubview:createLabel];
     
-    UILabel *repoLabel = [[UILabel alloc] initWithFrame:CGRectMake(95.0f, 10.0f, 165.0f, 30.0f)];
+    UILabel *repoLabel = [[UILabel alloc] initWithFrame:CGRectMake(95.0f, 10.0f, 195.0f, 30.0f)];
     repoLabel.text = [NSString stringWithFormat:@"(%@)", [_repository objectForKey:@"full_name"]];
     repoLabel.backgroundColor = [UIColor clearColor];
     repoLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
@@ -88,11 +88,11 @@
     [self.view addSubview:repoLabel];
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.frame = CGRectMake(265.0f, 11.0f, 50.0f, 30.0f);
+    cancelButton.frame = CGRectMake(280.0f, 11.0f, 50.0f, 30.0f);
     cancelButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
-    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:20.0f];
+    [cancelButton setTitle:@"X" forState:UIControlStateNormal];
     [cancelButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(cancelPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelButton];
@@ -326,6 +326,14 @@
     }
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if([textField.text isEqualToString:@""]) {
+        textField.text = @"Title";
+    }
+    
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -341,6 +349,13 @@
         textView.text = @"";
     }
     
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if([textView.text isEqualToString:@""]) {
+        textView.text = @"Leave a comment...";
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate
