@@ -17,4 +17,6 @@
 @property BOOL attachScreenshot;
 @property (nonatomic, strong) NSString *defaultAssignee;
 @property (nonatomic, strong) NSString *defaultMilestone;
+@property BOOL attachDeviceInfo;
++ (NSString*)machineName;
 @end

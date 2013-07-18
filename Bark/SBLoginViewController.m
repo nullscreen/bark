@@ -28,7 +28,8 @@ static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 @implementation SBLoginViewController
-@synthesize repositoryName = _repositoryName, defaultMilestone = _defaultMilestone, defaultAssignee = _defaultAssignee;
+@synthesize repositoryName = _repositoryName, defaultMilestone = _defaultMilestone,
+            defaultAssignee = _defaultAssignee, attachDeviceInfo = _attachDeviceInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -118,6 +119,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         SBIssueViewController *issueView = [[SBIssueViewController alloc] initWithAssignee:_defaultAssignee milestone:_defaultMilestone];
         issueView.repository = [response objectAtIndex:0];
         issueView.engine = engine;
+        issueView.attachDeviceInfo = _attachDeviceInfo;
         [aiView stopAnimating];
         [self.navigationController pushViewController:issueView animated:YES];
     } failure:^(NSError *error) {
