@@ -144,19 +144,19 @@
     createIssueButton.frame = CGRectMake(0.0f, self.view.frame.size.height-50.0f, self.view.frame.size.width-50.0f, 50.0f);
     createIssueButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     createIssueButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    createIssueButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
+    createIssueButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f];
     [createIssueButton setTitle:@"Create Issue" forState:UIControlStateNormal];
     [createIssueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [createIssueButton addTarget:self action:@selector(createIssuePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:createIssueButton];
     
     UIButton *logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [logoutButton setBackgroundColor:[UIColor redColor]];
+    [logoutButton setBackgroundColor:[UIColor colorWithRed:30.0f/255.0f green:71.0f/255.0f blue:122.0f/255.0f alpha:1.0f]];
     logoutButton.frame = CGRectMake(self.view.frame.size.width-50.0f, self.view.frame.size.height-50.0f, 50.0f, 50.0f);
     logoutButton.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     logoutButton.titleLabel.numberOfLines = 2;
     logoutButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    logoutButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+    logoutButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f];
     [logoutButton setTitle:@"Sign\nout" forState:UIControlStateNormal];
     [logoutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [logoutButton addTarget:self action:@selector(logoutPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -285,7 +285,7 @@
     }
     
     UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    aiView.frame = CGRectMake(100.0f, self.view.frame.size.height-25.0f, 0.0f, 0.0f);
+    aiView.frame = CGRectMake(72.0f, self.view.frame.size.height-25.0f, 0.0f, 0.0f);
     aiView.hidesWhenStopped = YES;
     [self.view addSubview:aiView];
     
