@@ -49,6 +49,7 @@ window.attachScreenshot = YES; // defaults to YES
 // github
 window.defaultAssignee = @"your_username";
 window.defaultMilestone = @"milestone_title";
+window.attachDeviceInfo = YES; // defaults to YES
 ```
 
 ### Coming Soon ###
