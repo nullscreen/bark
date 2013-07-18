@@ -104,6 +104,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)login
 {
+    UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    aiView.frame = CGRectMake(95.0f, 265.0f, 40.0f, 40.0f);
+    aiView.hidesWhenStopped = YES;
+    [self.view addSubview:aiView];
+    [aiView startAnimating];
+    
+    
     UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:nameField.text password:passField.text withReachability:YES];
     [engine repository:_repositoryName success:^(id response) {
         [UICKeyChainStore setString:nameField.text forKey:@"username"];
@@ -111,8 +118,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         SBIssueViewController *issueView = [[SBIssueViewController alloc] initWithAssignee:_defaultAssignee milestone:_defaultMilestone];
         issueView.repository = [response objectAtIndex:0];
         issueView.engine = engine;
+        [aiView stopAnimating];
         [self.navigationController pushViewController:issueView animated:YES];
     } failure:^(NSError *error) {
+        [aiView stopAnimating];
         UIAlertView *loginAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                  message:@"Invalid User Credentials"
                                                                 delegate:self
@@ -120,7 +129,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                                                        otherButtonTitles:@"OK", nil];
         [loginAlertView show];
     }];
-    
+
 }
 
 - (void)cancelPressed
