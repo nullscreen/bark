@@ -9,6 +9,7 @@
 #import "SBIssueViewController.h"
 #import "UAGithubEngine.h"
 #import "UICKeyChainStore.h"
+#import "SBWindow.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define ASSIGN_BUTTON_TAG 1
@@ -31,7 +32,7 @@
 
 @implementation SBIssueViewController
 @synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary,
-            labels = _labels, asignees = _asignees, milestones = _milestones;
+            labels = _labels, asignees = _asignees, milestones = _milestones, attachDeviceInfo = _attachDeviceInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,6 +49,7 @@
     if(self) {
         _defaultAssignee = assignee;
         _defaultMilestone = milestone;
+        _attachDeviceInfo = YES;
     }
     return self;
 }
@@ -132,11 +134,18 @@
     [milestoneButton addTarget:self action:@selector(milestonePressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:milestoneButton];
     
+    // get app version, build number, ios version
+    NSString *iosVersion = [UIDevice currentDevice].systemVersion;
+    NSString *iphoneModel = [SBWindow machineName];
+    NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nModel: %@\nApp Version: %@\nBuild: %@", iosVersion, iphoneModel, appVersion,build];
+    
     bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 150.0f)];
     bodyField.delegate = self;
     bodyField.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     bodyField.backgroundColor = [UIColor whiteColor];
-    bodyField.text = @"Leave a comment...";
+    bodyField.text = _attachDeviceInfo ? defaultBody : @"Leave a comment...";
     [self.view addSubview:bodyField];
     
     UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -18,13 +18,14 @@
 @implementation SBWindow
 @synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody,
             attachScreenshot = _attachScreenshot, repositoryName = _repositoryName,
-            defaultAssignee = _defaultAssignee, defaultMilestone = _defaultMilestone;
+            defaultAssignee = _defaultAssignee, defaultMilestone = _defaultMilestone, attachDeviceInfo = _attachDeviceInfo;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         _attachScreenshot = YES;
+        _attachDeviceInfo = YES;
     }
     return self;
 }
@@ -75,6 +76,7 @@
                 SBIssueViewController *issueView = [[SBIssueViewController alloc] initWithAssignee:_defaultAssignee milestone:_defaultMilestone];
                 issueView.repository = [response objectAtIndex:0];
                 issueView.engine = engine;
+                issueView.attachDeviceInfo = _attachDeviceInfo;
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
                 [currentViewController presentViewController:navController animated:YES completion:nil];
             } failure:^(NSError *error) {
@@ -85,6 +87,7 @@
             loginViewController.repositoryName = _repositoryName;
             loginViewController.defaultAssignee = _defaultAssignee;
             loginViewController.defaultMilestone  = _defaultMilestone;
+            loginViewController.attachDeviceInfo = _attachDeviceInfo;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
             [currentViewController presentViewController:navController animated:YES completion:nil];
         }
@@ -107,7 +110,7 @@
         
         // get app version, build number, ios version
         NSString *iosVersion = [UIDevice currentDevice].systemVersion;
-        NSString *iphoneModel = machineName();
+        NSString *iphoneModel = [SBWindow machineName];
         NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
         NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
         NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nModel: %@\nApp Version: %@\nBuild: %@", iosVersion, iphoneModel, appVersion,build];
@@ -141,7 +144,7 @@
     [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-NSString* machineName()
++ (NSString*)machineName
 {
     struct utsname systemInfo;
     uname(&systemInfo);

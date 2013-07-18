@@ -28,6 +28,7 @@
      // github
      window.defaultAssignee = @"austinlouden";
      window.defaultMilestone = @"1.0";
+     window.attachDeviceInfo = YES; // defaults to YES
      */
     
     self.window = window;
