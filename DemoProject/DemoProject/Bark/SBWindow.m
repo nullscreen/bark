@@ -18,7 +18,7 @@
 @implementation SBWindow
 @synthesize emailSubject = _emailSubject, emailRecipients = _emailRecipients, emailBody = _emailBody,
             attachScreenshot = _attachScreenshot, repositoryName = _repositoryName,
-            defaultAssignee = _defaultAssignee, defaultMilestone = _defaultMilestone, attachDeviceInfo = _attachDeviceInfo;
+            defaultAssignee = _defaultAssignee, defaultMilestone = _defaultMilestone, attachDeviceInfo = _attachDeviceInfo, windowDelegate = windowDelegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -37,7 +37,17 @@
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    if (motion == UIEventSubtypeMotionShake) {
+    
+    if([[[UIApplication sharedApplication] delegate] respondsToSelector:@selector(shouldShowActionSheet)]) {
+        if(motion == UIEventSubtypeMotionShake && [windowDelegate shouldShowActionSheet]) {
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                     delegate:self
+                                                            cancelButtonTitle:@"Cancel"
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:@"Send Email", @"Create GitHub Issue", nil];
+            [actionSheet showInView:self];
+        }
+    } else if(motion == UIEventSubtypeMotionShake) {
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                                  delegate:self
                                                         cancelButtonTitle:@"Cancel"

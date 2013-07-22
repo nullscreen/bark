@@ -17,6 +17,7 @@
     // create an instance of the SBWindow subclass and set the repository name
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     window.repositoryName = @"stagebloc/bark";
+    window.windowDelegate = self;
     
     /* optional settings
      // email
@@ -39,6 +40,20 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    return YES;
+}
+
+#pragma mark - SBWindowDelegate
+
+- (BOOL)shouldShowActionSheet
+{
+    /* 
+    add the logic to determine whether or not to show the action sheet. Something like:
+     if([currentUser isAdmin]) {
+        return YES;
+     } else return NO;
+    */
+    
     return YES;
 }
 
