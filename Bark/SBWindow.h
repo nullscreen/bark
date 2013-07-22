@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
+@protocol SBWindowDelegate
+@optional
+- (BOOL)shouldShowActionSheet;
+@end
+
 @interface SBWindow : UIWindow <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@property (nonatomic, assign) id <SBWindowDelegate> windowDelegate;
 @property (nonatomic, strong) NSString *repositoryName;
 @property (nonatomic, strong) NSArray *emailRecipients;
 @property (nonatomic, strong) NSString *emailSubject;
