@@ -66,12 +66,12 @@ BARK can now be used in production by implementing a simple callback.
 #import "SBWindow.h"
 @interface SBAppDelegate : UIResponder <UIApplicationDelegate, SBWindowDelegate>
 ```
-2) Set the delegate property on your `SBWindow` instance in your `AppDelegate.m` file. Note that the property is called `windowDelegate` as opposed to `delegate`. This is to avoid interfering with `delegate` property on the `UIWindow` superclass.
+2) Set the delegate property on your `SBWindow` instance in your `AppDelegate.m` file. Note that the property is called `windowDelegate` as opposed to `delegate`. This is to avoid interfering with the `delegate` property on the `UIWindow` superclass.
 
 ```objc
 window.windowDelegate = self;
 ```
-3) Implement the delegate method `shouldShowActionSheet`. You'll need to create your own way of determining whether or not the current user is an admin.
+3) Implement the delegate method `shouldShowActionSheet`. You'll need to create your own way of determining whether or not the current user is an admin. We check against the logged in user's email address.
 
 ```objc
 - (BOOL)shouldShowActionSheet
