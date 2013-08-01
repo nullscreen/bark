@@ -9,7 +9,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
 </p>
 ## Get Started ##
 
-1. Add it to your Podfile `pod 'Bark', '~> 0.1'` or clone the repository with `git clone git@github.com:stagebloc/bark.git` 
+1. Add BARK to your Podfile `pod 'Bark', '~> 0.1'` or clone the repository with `git clone git@github.com:stagebloc/bark.git` 
 2. Link the following frameworks in the Build Phases tab: 
     - `MessageUI` - to send emails from within the app
     - `SystemConfiguration` -  for network reachability support
