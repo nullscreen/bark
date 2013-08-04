@@ -14,22 +14,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // create an instance of the SBWindow subclass and set the repository name
+    // create an instance of the SBWindow subclass which will dispatch kSBWindowDidShakeNotification when window shake
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    window.repositoryName = @"stagebloc/bark";
-    window.windowDelegate = self;
+    
+    // configure bart
+    SBBark *bark = [SBBark sharedBark];
+    bark.repositoryName = @"stagebloc/bark";
+    bark.delegate = self;
+    // hook bark to shake motion
+    [[NSNotificationCenter defaultCenter] addObserverForName:kSBWindowDidShakeNotification object:window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [bark showBark];
+    }];
     
     /* optional settings
+     
      // email
-     window.emailRecipients = @[@"hi@stagebloc.com", @"ratchet@stagebloc.com"];
-     window.emailSubject = @"Subject";
-     window.emailBody = @"Body"; // note that this will override sending device info
-     window.attachScreenshot = YES; // defaults to YES
+     bark.emailRecipients = @[@"hi@stagebloc.com", @"ratchet@stagebloc.com"];
+     bark.emailSubject = @"Subject";
+     bark.emailBody = @"Body"; // note that this will override sending device info
+     bark.attachScreenshot = YES; // defaults to YES
      
      // github
-     window.defaultAssignee = @"austinlouden";
-     window.defaultMilestone = @"1.0";
-     window.attachDeviceInfo = YES; // defaults to YES
+     bark.defaultAssignee = @"austinlouden";
+     bark.defaultMilestone = @"1.0";
+     bark.attachDeviceInfo = YES; // defaults to YES
      */
     
     self.window = window;

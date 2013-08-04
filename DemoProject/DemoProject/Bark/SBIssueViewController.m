@@ -10,6 +10,7 @@
 #import "UAGithubEngine.h"
 #import "UICKeyChainStore.h"
 #import "SBWindow.h"
+#import "SBBark.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define ASSIGN_BUTTON_TAG 1
@@ -136,7 +137,7 @@
     
     // get app version, build number, ios version
     NSString *iosVersion = [UIDevice currentDevice].systemVersion;
-    NSString *iphoneModel = [SBWindow machineName];
+    NSString *iphoneModel = [[SBBark class] machineName];
     NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
     NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nModel: %@\nApp Version: %@\nBuild: %@", iosVersion, iphoneModel, appVersion,build];
