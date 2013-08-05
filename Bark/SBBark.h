@@ -1,5 +1,5 @@
 //
-//  ALWindow.h
+//  SBWindow.h
 //  DemoProject
 //
 //  Created by Austin Louden on 7/3/13.
@@ -10,7 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 @protocol SBBarkDelegate <NSObject>
-@optional
+@required
 - (BOOL)shouldShowActionSheet;
 @end
 

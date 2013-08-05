@@ -1,5 +1,5 @@
 //
-//  ALWindow.m
+//  SBWindow.m
 //  DemoProject
 //
 //  Created by Austin Louden on 7/3/13.
@@ -35,8 +35,6 @@
 - (void)showBark
 {
     if([self.delegate respondsToSelector:@selector(shouldShowActionSheet)] && [self.delegate shouldShowActionSheet])
-        [self presentActionSheet];
-    else
         [self presentActionSheet];
 }
 

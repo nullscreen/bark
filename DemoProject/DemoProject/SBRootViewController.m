@@ -1,5 +1,5 @@
 //
-//  ALRootViewController.m
+//  SBRootViewController.m
 //  DemoProject
 //
 //  Created by Austin Louden on 7/3/13.

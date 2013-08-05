@@ -1,5 +1,5 @@
 //
-//  ALAppDelegate.m
+//  SBAppDelegate.m
 //  DemoProject
 //
 //  Created by Austin Louden on 7/3/13.

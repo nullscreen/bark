@@ -1,5 +1,5 @@
 //
-//  ALIssueViewController.m
+//  SBIssueViewController.m
 //  DemoProject
 //
 //  Created by Austin Louden on 7/8/13.
