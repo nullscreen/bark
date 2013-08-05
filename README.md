@@ -14,11 +14,14 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
 2. Link the following frameworks in the Build Phases tab: 
     - `MessageUI` - to send emails from within the app
     - `SystemConfiguration` -  for network reachability support
-    - `Security` - for secure storage of GitHub credentials
-3. In your `AppDelegate.m`, `#import "SBWindow.h"` and `#import "SBBark.h"`
-4. Finally, set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `bark.repositoryName` to the name of the repository you want to submit issues to.
+    - `Security` - for secure storage of GitHub credentials. 
+4. In your `AppDelegate.h` file,  `#import "SBBark.h"`, and add `<SBBarkDelegate>` to the delegate list.
+5. Set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `bark.repositoryName` to the name of the repository you want to submit issues to.
 
 ```objc
+#import "SBWindow.h"
+...
+
 // an example applicationdidFinishLaunchingWithOptions method
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -29,7 +32,6 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     SBBark *bark = [SBBark sharedBark];
     bark.repositoryName = @"stagebloc/bark";
     bark.delegate = self;
-    // hook bark to shake motion
     [[NSNotificationCenter defaultCenter] addObserverForName:kSBWindowDidShakeNotification 
                                                       object:window 
                                                        queue:[NSOperationQueue mainQueue] 
@@ -42,9 +44,22 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     // Override point for customization after application launch.
     SBRootViewController *rootViewController = [[SBRootViewController alloc] init];
     self.window.rootViewController = rootViewController;
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    return YES;
+}
+```
+
+Finally, implement the `shouldShowActionSheet` method below. `return YES` to always show the action sheet on shake, or add your own custom logic.
+
+```objc
+- (BOOL)shouldShowActionSheet
+{
+    /* add the logic to determine whether or not to show the action sheet. Something like:
+     if([currentUser isAdmin]) {
+        return YES;
+     } else return NO;
+    */
     return YES;
 }
 ```
@@ -77,30 +92,19 @@ Submitting images through the GitHub API is currently unsupported. We're plannin
 
 ## Using BARK in Production ##
 
-BARK can now be used in production by implementing a simple callback.
-
-1) Add the `SBBarkDelegate` to your `AppDelegate.h` file. 
-
-```objc
-#import "SBBark.h"
-@interface SBAppDelegate : UIResponder <UIApplicationDelegate, SBBarkDelegate>
-```
-2) Set the delegate property on your `SBBark` instance in your `AppDelegate.m` file.
-
-```objc
-bark.delegate = self;
-```
-3) Implement the delegate method `shouldShowActionSheet`. You'll need to create your own way of determining whether or not the current user is an admin. We check against the logged in user's email address.
+BARK can be used in production by customizing the `shouldShowActionSheet` method. You'll need to create your own way of determining whether or not the current user is an admin. Take a look at the example below - we check against the logged in user's email address.
 
 ```objc
 - (BOOL)shouldShowActionSheet
 {
-    /* add the logic to determine whether or not to show the action sheet. Something like:
-     if([currentUser isAdmin]) {
-        return YES;
-     } else return NO;
-    */
-    return YES;
+    NSArray *adminEmails = @[@"employee1@stagebloc.com", @"employee2@stagebloc.com"];
+    for(NSString *email in adminEmails) {
+        if([email isEqualToString:[[self getLoggedInUser] email]]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 ```
 
