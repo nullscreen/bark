@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SBWindow.h"
+#import "SBBark.h"
 
-@interface SBAppDelegate : UIResponder <UIApplicationDelegate, SBWindowDelegate>
+@interface SBAppDelegate : UIResponder <UIApplicationDelegate, SBBarkDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
