@@ -3,6 +3,7 @@
 </p>
 
 BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for iOS. Shaking the app pulls up an action sheet, where beta users can instantly send email or create GitHub issues.
+
 <p align="center">
 <img src="http://i.imgur.com/Tge4KbW.png" alt="action sheet" title="action sheet" width="300" height="564">
 <img src="http://i.imgur.com/iu0iydA.png" alt="issue view" title="issue view" width="300" height="564">
@@ -14,7 +15,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     - `MessageUI` - to send emails from within the app
     - `SystemConfiguration` -  for network reachability support
     - `Security` - for secure storage of GitHub credentials
-3. In your `AppDelegate.m`, `#import "SBWindow.h"`
+3. In your `AppDelegate.m`, `#import "SBWindow.h"` and `#import "SBBark.h"`
 4. Finally, set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `bark.repositoryName` to the name of the repository you want to submit issues to.
 
 ```objc
@@ -29,7 +30,10 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     bark.repositoryName = @"stagebloc/bark";
     bark.delegate = self;
     // hook bark to shake motion
-    [[NSNotificationCenter defaultCenter] addObserverForName:kSBWindowDidShakeNotification object:window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:kSBWindowDidShakeNotification 
+                                                      object:window 
+                                                       queue:[NSOperationQueue mainQueue] 
+                                                  usingBlock:^(NSNotification *note) {
         [bark showBark];
     }];
     
@@ -47,7 +51,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
 
 ## Features ##
 
-BARK comes with a set of features to make quick adjustments. You can set these below `repositoryName` on the window object.
+BARK comes with a set of features to make quick adjustments. You can set these below `repositoryName` on the `bark` object.
 
 ```objc
 // email
@@ -60,6 +64,11 @@ bark.attachScreenshot = YES; // defaults to YES
 bark.defaultAssignee = @"your_username";
 bark.defaultMilestone = @"milestone_title";
 bark.attachDeviceInfo = YES; // defaults to YES
+```
+
+BARK can also be shown programmatically anywhere in the application using the `SBBark` singleton:
+```objc
+[[SBBark sharedBark] showBark];
 ```
 
 ### Coming Soon ###
