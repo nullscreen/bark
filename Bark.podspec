@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Bark"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.summary      = "A streamlined issue reporting library for iOS."
   s.homepage     = "http://stagebloc.com/bark"
   s.license      = { :type => 'MIT', :file => 'LICENSE.md' }
