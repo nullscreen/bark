@@ -14,6 +14,7 @@
 #import "SBIssueViewController.h"
 #import "SBLoginViewController.h"
 #import "UICKeyChainStore.h"
+#import "SBImageAPIClient.h"
 
 @implementation SBBark
 
@@ -67,7 +68,7 @@
     
     
     if(buttonIndex == 0) {
-        [self showEmailView];
+        [self uploadPhoto];
     } else if (buttonIndex == 1) {
         if([UICKeyChainStore stringForKey:@"username"]) {
             UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:[UICKeyChainStore stringForKey:@"username"]
@@ -94,6 +95,19 @@
             [currentViewController presentViewController:navController animated:YES completion:nil];
         }
     }
+}
+
+- (void)uploadPhoto
+{
+    if(_attachScreenshot) {
+        UIGraphicsBeginImageContext([self window].bounds.size);
+        [[self window].layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        NSData *data = UIImagePNGRepresentation(image);
+        [[SBImageAPIClient sharedClient] uploadImageWithData:data];
+    }
+
 }
 
 #pragma mark - MFMailComposer

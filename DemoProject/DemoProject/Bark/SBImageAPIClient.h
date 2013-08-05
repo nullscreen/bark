@@ -12,5 +12,5 @@
 @interface SBImageAPIClient : AFHTTPClient
 
 + (SBImageAPIClient *)sharedClient;
-
+- (void)uploadImageWithData:(NSData*)imageData;
 @end
