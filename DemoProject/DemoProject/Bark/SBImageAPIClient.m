@@ -44,17 +44,7 @@ static NSString * const kImageShackAPIKey = @"";
     NSDictionary *params = @{@"key": kImageShackAPIKey,
                              @"format" : @"json",
                              @"public" : @"no"
-                             //@"fileupload" : [NSString stringWithUTF8String:[imageData bytes]]
                              };
-    
-    /*
-    [self postPath:@"upload_api.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-     */
-    
     
     NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"upload_api.php" parameters:params constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"fileupload" fileName:@"image.png" mimeType:@"image/png"];
