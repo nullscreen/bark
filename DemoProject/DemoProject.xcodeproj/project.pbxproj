@@ -31,6 +31,7 @@
 		89356A5317B0501900E3A0FC /* UAGithubURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89356A3A17B0501900E3A0FC /* UAGithubURLConnection.m */; };
 		89356A5417B0501900E3A0FC /* UAReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 89356A3C17B0501900E3A0FC /* UAReachability.m */; };
 		89356A5517B0501900E3A0FC /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 89356A3F17B0501900E3A0FC /* UICKeyChainStore.m */; };
+		89356A5B17B057E800E3A0FC /* SBImageAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 89356A5A17B057E800E3A0FC /* SBImageAPIClient.m */; };
 		89F292B91784C5D3009DD393 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292B81784C5D3009DD393 /* UIKit.framework */; };
 		89F292BB1784C5D3009DD393 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BA1784C5D3009DD393 /* Foundation.framework */; };
 		89F292BD1784C5D3009DD393 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F292BC1784C5D3009DD393 /* CoreGraphics.framework */; };
@@ -113,6 +114,8 @@
 		89356A3C17B0501900E3A0FC /* UAReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAReachability.m; sourceTree = "<group>"; };
 		89356A3E17B0501900E3A0FC /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
 		89356A3F17B0501900E3A0FC /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
+		89356A5917B057E800E3A0FC /* SBImageAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBImageAPIClient.h; sourceTree = "<group>"; };
+		89356A5A17B057E800E3A0FC /* SBImageAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBImageAPIClient.m; sourceTree = "<group>"; };
 		89F292B51784C5D3009DD393 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89F292B81784C5D3009DD393 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		89F292BA1784C5D3009DD393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -336,6 +339,8 @@
 				F344149517AE1E94009D9784 /* github_logo@2x.png */,
 				F344149617AE1E94009D9784 /* SBBark.h */,
 				F344149717AE1E94009D9784 /* SBBark.m */,
+				89356A5917B057E800E3A0FC /* SBImageAPIClient.h */,
+				89356A5A17B057E800E3A0FC /* SBImageAPIClient.m */,
 				F344149817AE1E94009D9784 /* SBIssueViewController.h */,
 				F344149917AE1E94009D9784 /* SBIssueViewController.m */,
 				F344149A17AE1E94009D9784 /* SBLoginViewController.h */,
@@ -488,6 +493,7 @@
 				89356A5317B0501900E3A0FC /* UAGithubURLConnection.m in Sources */,
 				89356A5417B0501900E3A0FC /* UAReachability.m in Sources */,
 				89356A5517B0501900E3A0FC /* UICKeyChainStore.m in Sources */,
+				89356A5B17B057E800E3A0FC /* SBImageAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
