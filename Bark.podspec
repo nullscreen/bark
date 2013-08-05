@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "http://stagebloc.com/bark"
   s.license      = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author       = { "StageBloc" => "austinlouden@gmail.com" }
-  s.source       = { :git => "https://github.com/stagebloc/bark.git", :tag => "v0.1" }
+  s.source       = { :git => "https://github.com/stagebloc/bark.git", :tag => "v0.2" }
   s.platform     = :ios, '5.0'
   s.ios.deployment_target = '5.0'
   s.source_files = 'Bark', 'Bark/**/*.{h,m}'
