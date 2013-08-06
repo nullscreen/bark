@@ -12,5 +12,6 @@
 @property (nonatomic, strong) NSString *repositoryName;
 @property (nonatomic, strong) NSString *defaultAssignee;
 @property (nonatomic, strong) NSString *defaultMilestone;
+@property (nonatomic, strong) NSData *imageData;
 @property BOOL attachDeviceInfo;
 @end

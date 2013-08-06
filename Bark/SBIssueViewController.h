@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSMutableDictionary *issueDictionary;
 @property (nonatomic, strong) NSString *defaultAssignee;
 @property (nonatomic, strong) NSString *defaultMilestone;
+@property (nonatomic, strong) NSData *imageData;
 @property BOOL attachDeviceInfo;
 - (id)initWithAssignee:(NSString*)assignee milestone:(NSString*)milestone;
 @end
