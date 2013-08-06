@@ -28,6 +28,16 @@
     return self;
 }
 
++ (id)sharedBark;
+{
+    static SBBark *_sharedBark;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedBark = [SBBark new];
+    });
+    return _sharedBark;
+}
+
 - (UIWindow *)window
 {
     return [[[[[UIApplication sharedApplication] windows] reverseObjectEnumerator] allObjects] lastObject];
@@ -68,7 +78,7 @@
     
     
     if(buttonIndex == 0) {
-        [self uploadPhoto];
+        [self showEmailView];
     } else if (buttonIndex == 1) {
         if([UICKeyChainStore stringForKey:@"username"]) {
             UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:[UICKeyChainStore stringForKey:@"username"]
@@ -76,10 +86,12 @@
                                                              withReachability:YES];
             
             [engine repository:_repositoryName success:^(id response) {
+                
                 SBIssueViewController *issueView = [[SBIssueViewController alloc] initWithAssignee:_defaultAssignee milestone:_defaultMilestone];
                 issueView.repository = [response objectAtIndex:0];
                 issueView.engine = engine;
                 issueView.attachDeviceInfo = _attachDeviceInfo;
+                issueView.imageData = [self getImageData];
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
                 [currentViewController presentViewController:navController animated:YES completion:nil];
             } failure:^(NSError *error) {
@@ -96,20 +108,7 @@
         }
     }
 }
-
-- (void)uploadPhoto
-{
-    if(_attachScreenshot) {
-        UIGraphicsBeginImageContext([self window].bounds.size);
-        [[self window].layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        NSData *data = UIImagePNGRepresentation(image);
-        [[SBImageAPIClient sharedClient] uploadImageWithData:data];
-    }
-
-}
-
+ 
 #pragma mark - MFMailComposer
 
 - (void)showEmailView
@@ -129,16 +128,12 @@
         NSString *iphoneModel = [[self class] machineName];
         NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
         NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-        NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nModel: %@\nApp Version: %@\nBuild: %@", iosVersion, iphoneModel, appVersion,build];
+        NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nModel: %@\nApp Version: %@\nBuild: %@",
+                                                            iosVersion, iphoneModel, appVersion,build];
         [mailer setMessageBody:_emailBody ? _emailBody : defaultBody isHTML:NO];
         
-        // take screen shot - note, this will not capture OpenGL ES elements
         if(_attachScreenshot) {
-            UIGraphicsBeginImageContext([self window].bounds.size);
-            [[self window].layer renderInContext:UIGraphicsGetCurrentContext()];
-            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            NSData *data = UIImagePNGRepresentation(image);
+            NSData *data = [self getImageData];
             [mailer addAttachmentData:data mimeType:@"image/png" fileName:@"screenshot"];
         }
         
@@ -158,6 +153,17 @@
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     [[self window].rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Helpers
+
+- (NSData*)getImageData
+{
+    UIGraphicsBeginImageContext([self window].bounds.size);
+    [[self window].layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return UIImagePNGRepresentation(image);;
 }
 
 + (NSString*)machineName
@@ -208,16 +214,6 @@
     }
     
     return deviceString;
-}
-
-+ (id)sharedBark;
-{
-    static SBBark *_sharedBark;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedBark = [SBBark new];
-    });
-    return _sharedBark;
 }
 
 @end

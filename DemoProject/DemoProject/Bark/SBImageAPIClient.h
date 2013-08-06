@@ -12,5 +12,5 @@
 @interface SBImageAPIClient : AFHTTPClient
 
 + (SBImageAPIClient *)sharedClient;
-- (void)uploadImageWithData:(NSData*)imageData;
+- (void)uploadImageWithData:(NSData*)imageData success:(void (^)(id JSON))success failure:(void (^)(NSError *error))failure;
 @end

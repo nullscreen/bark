@@ -11,6 +11,7 @@
 #import "UICKeyChainStore.h"
 #import "SBWindow.h"
 #import "SBBark.h"
+#import "SBImageAPIClient.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define ASSIGN_BUTTON_TAG 1
@@ -33,7 +34,7 @@
 
 @implementation SBIssueViewController
 @synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary,
-            labels = _labels, asignees = _asignees, milestones = _milestones, attachDeviceInfo = _attachDeviceInfo;
+            labels = _labels, asignees = _asignees, milestones = _milestones, attachDeviceInfo = _attachDeviceInfo, imageData = _imageData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -294,12 +295,6 @@
         return;
     }
     
-    UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    aiView.frame = CGRectMake(72.0f, self.view.frame.size.height-25.0f, 0.0f, 0.0f);
-    aiView.hidesWhenStopped = YES;
-    [self.view addSubview:aiView];
-    
-    [aiView startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         
     if(selectedAssignee) { [_issueDictionary setObject:selectedAssignee forKey:@"assignee"]; }
@@ -308,16 +303,44 @@
     if(selectedLabels.count > 0) { [_issueDictionary setObject:selectedLabels forKey:@"labels"]; }
     
     __weak typeof(self) weakSelf = self;
-    [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
-    [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        [aiView stopAnimating];
-        [button setTitle:@"Success!" forState:UIControlStateNormal];
-        [weakSelf performSelector:@selector(cancelPressed) withObject:nil afterDelay:1.0f];
-    } failure:^(NSError *error) {
-        NSLog(@"error");
-    }];
+    
+    // TODO: if attach screenshot
+    if(YES) {
+        [button setTitle:@"Uploading screenshot..." forState:UIControlStateNormal];
+        [[SBImageAPIClient sharedClient] uploadImageWithData:_imageData success:^(id JSON) {
+            
+            // append the screenshot in markdown to the body of the text
+            NSString *modifiedBody = [NSString stringWithFormat:@"%@\n![screenshot](%@ \"screenshot\")", bodyField.text, [[JSON objectForKey:@"links"] objectForKey:@"image_link"]];
+            [_issueDictionary setObject:modifiedBody forKey:@"body"];
+            
+            [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
+            [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                [button setTitle:@"Success!" forState:UIControlStateNormal];
+                [weakSelf performSelector:@selector(cancelPressed) withObject:nil afterDelay:1.0f];
+            } failure:^(NSError *error) {
+                NSLog(@"error");
+            }];
+
+        } failure:^(NSError *error) {
+            NSLog(@"%@", error);
+        }];
+    } else {
+        [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
+        [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            [button setTitle:@"Success!" forState:UIControlStateNormal];
+            [weakSelf performSelector:@selector(cancelPressed) withObject:nil afterDelay:1.0f];
+        } failure:^(NSError *error) {
+            NSLog(@"error");
+        }];
+    }
 }
+
+
+#pragma mark - Helpers
+
+ 
 
 - (void)didReceiveMemoryWarning
 {

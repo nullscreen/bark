@@ -39,7 +39,7 @@ static NSString * const kImageShackAPIKey = @"";
     return self;
 }
 
-- (void)uploadImageWithData:(NSData*)imageData
+- (void)uploadImageWithData:(NSData*)imageData success:(void (^)(id JSON))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *params = @{@"key": kImageShackAPIKey,
                              @"format" : @"json",
@@ -51,9 +51,9 @@ static NSString * const kImageShackAPIKey = @"";
     }];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"%@", JSON);
+        success(JSON);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"%@", error);
+        failure(error);
     }];
     
     [operation start];
