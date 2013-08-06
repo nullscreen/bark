@@ -103,6 +103,7 @@
             loginViewController.defaultAssignee = _defaultAssignee;
             loginViewController.defaultMilestone  = _defaultMilestone;
             loginViewController.attachDeviceInfo = _attachDeviceInfo;
+            loginViewController.imageData = [self getImageData];
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
             [currentViewController presentViewController:navController animated:YES completion:nil];
         }

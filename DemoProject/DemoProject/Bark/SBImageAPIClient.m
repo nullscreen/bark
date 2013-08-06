@@ -31,11 +31,7 @@ static NSString * const kImageShackAPIKey = @"";
     }
     
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
-    // Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
 	[self setDefaultHeader:@"Accept" value:@"application/json"];
-    
-    
     return self;
 }
 
@@ -46,11 +42,18 @@ static NSString * const kImageShackAPIKey = @"";
                              @"public" : @"no"
                              };
     
-    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:@"upload_api.php" parameters:params constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:@"fileupload" fileName:@"image.png" mimeType:@"image/png"];
+    NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST"
+                                                            path:@"upload_api.php"
+                                                      parameters:params
+                                       constructingBodyWithBlock: ^(id <AFMultipartFormData> formData) {
+                                           [formData appendPartWithFileData:imageData
+                                                                       name:@"fileupload"
+                                                                   fileName:@"image.png"
+                                                                   mimeType:@"image/png"];
     }];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         success(JSON);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         failure(error);

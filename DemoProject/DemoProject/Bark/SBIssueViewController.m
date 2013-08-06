@@ -28,6 +28,7 @@
     NSString *selectedAssignee;
     NSNumber *selectedMilestone;
     NSMutableArray *selectedLabels;
+    UISwitch *screenshotSwitch;
 }
 
 @end
@@ -136,6 +137,16 @@
     [milestoneButton addTarget:self action:@selector(milestonePressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:milestoneButton];
     
+    UILabel *screenshotLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 35.0f)];
+    screenshotLabel.backgroundColor = [UIColor colorWithRed:(135.0f/255.0f) green:(222.0f/255.0f) blue:(254.0f/255.0f) alpha:1.0f];
+    screenshotLabel.text = @"     Attach Screenshot";
+    screenshotLabel.textColor = [UIColor whiteColor];
+    screenshotLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
+    [self.view addSubview:screenshotLabel];
+    
+    screenshotSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(200.0f, 149.0f, 0.0f, 0.0f)];
+    [self.view addSubview:screenshotSwitch];
+    
     // get app version, build number, ios version
     NSString *iosVersion = [UIDevice currentDevice].systemVersion;
     NSString *iphoneModel = [[SBBark class] machineName];
@@ -143,12 +154,13 @@
     NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nModel: %@\nApp Version: %@\nBuild: %@", iosVersion, iphoneModel, appVersion,build];
     
-    bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 150.0f)];
+    bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 180.0f, self.view.frame.size.width, 115.0f)];
     bodyField.delegate = self;
     bodyField.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     bodyField.backgroundColor = [UIColor whiteColor];
     bodyField.text = _attachDeviceInfo ? defaultBody : @"Leave a comment...";
     [self.view addSubview:bodyField];
+    
     
     UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [createIssueButton setBackgroundColor:[UIColor colorWithRed:(30.0f/255.0f) green:(30.0f/255.0f) blue:(34.0f/255.0f) alpha:1.0f]];
@@ -176,7 +188,7 @@
 
 - (void)setupLabels
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 295.0f, self.view.frame.size.height, self.view.frame.size.height-295.0f-50.0f)];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 295.0f, self.view.frame.size.width, self.view.frame.size.height-295.0f-50.0f)];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.allowsMultipleSelection = YES;
@@ -303,9 +315,7 @@
     if(selectedLabels.count > 0) { [_issueDictionary setObject:selectedLabels forKey:@"labels"]; }
     
     __weak typeof(self) weakSelf = self;
-    
-    // TODO: if attach screenshot
-    if(YES) {
+    if([screenshotSwitch isOn]) {
         [button setTitle:@"Uploading screenshot..." forState:UIControlStateNormal];
         [[SBImageAPIClient sharedClient] uploadImageWithData:_imageData success:^(id JSON) {
             
