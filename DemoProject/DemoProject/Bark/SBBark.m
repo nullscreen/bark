@@ -7,14 +7,17 @@
 //
 
 #import "SBBark.h"
+
+#import "SBIssueViewController.h"
+#import "SBLoginViewController.h"
+#import "SBImageAPIClient.h"
+
+#import "UAGithubEngine.h"
+#import "UICKeyChainStore.h"
+
 #import <MessageUI/MessageUI.h>
 #import <QuartzCore/QuartzCore.h>
 #import <sys/utsname.h>
-#import "UAGithubEngine.h"
-#import "SBIssueViewController.h"
-#import "SBLoginViewController.h"
-#import "UICKeyChainStore.h"
-#import "SBImageAPIClient.h"
 
 @implementation SBBark
 
@@ -38,27 +41,6 @@
     return _sharedBark;
 }
 
-- (UIWindow *)window
-{
-    return [[[[[UIApplication sharedApplication] windows] reverseObjectEnumerator] allObjects] lastObject];
-}
-
-- (void)showBark
-{
-    if([self.delegate respondsToSelector:@selector(shouldShowActionSheet)] && [self.delegate shouldShowActionSheet])
-        [self presentActionSheet];
-}
-
-- (void)presentActionSheet
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Send Email", @"Create GitHub Issue", nil];
-    [actionSheet showInView:[self window]];
-}
-
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -76,24 +58,28 @@
         currentViewController = rootViewController;
     }
     
-    
+    // present the email view
     if(buttonIndex == 0) {
         [self showEmailView];
-    } else if (buttonIndex == 1) {
+    }
+    // present either the issue view controller or the login view controller
+    else if (buttonIndex == 1) {
+        
         if([UICKeyChainStore stringForKey:@"username"]) {
             UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:[UICKeyChainStore stringForKey:@"username"]
                                                                      password:[UICKeyChainStore stringForKey:@"password"]
                                                              withReachability:YES];
             
             [engine repository:_repositoryName success:^(id response) {
-                
                 SBIssueViewController *issueView = [[SBIssueViewController alloc] initWithAssignee:_defaultAssignee milestone:_defaultMilestone];
                 issueView.repository = [response objectAtIndex:0];
                 issueView.engine = engine;
                 issueView.attachDeviceInfo = _attachDeviceInfo;
                 issueView.imageData = [self getImageData];
+                
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:issueView];
                 [currentViewController presentViewController:navController animated:YES completion:nil];
+                
             } failure:^(NSError *error) {
                 NSLog(@"Request failed with error: %@", error);
             }];
@@ -104,6 +90,7 @@
             loginViewController.defaultMilestone  = _defaultMilestone;
             loginViewController.attachDeviceInfo = _attachDeviceInfo;
             loginViewController.imageData = [self getImageData];
+            
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
             [currentViewController presentViewController:navController animated:YES completion:nil];
         }
@@ -157,6 +144,27 @@
 }
 
 #pragma mark - Helpers
+
+- (UIWindow *)window
+{
+    return [[[[[UIApplication sharedApplication] windows] reverseObjectEnumerator] allObjects] lastObject];
+}
+
+- (void)showBark
+{
+    if([self.delegate respondsToSelector:@selector(shouldShowActionSheet)] && [self.delegate shouldShowActionSheet])
+        [self presentActionSheet];
+}
+
+- (void)presentActionSheet
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Send Email", @"Create GitHub Issue", nil];
+    [actionSheet showInView:[self window]];
+}
 
 - (NSData*)getImageData
 {

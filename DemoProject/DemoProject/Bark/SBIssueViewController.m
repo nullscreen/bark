@@ -7,11 +7,14 @@
 //
 
 #import "SBIssueViewController.h"
-#import "UAGithubEngine.h"
-#import "UICKeyChainStore.h"
-#import "SBWindow.h"
+
 #import "SBBark.h"
 #import "SBImageAPIClient.h"
+#import "SBWindow.h"
+
+#import "UAGithubEngine.h"
+#import "UICKeyChainStore.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 #define ASSIGN_BUTTON_TAG 1
@@ -349,8 +352,6 @@
 
 
 #pragma mark - Helpers
-
- 
 
 - (void)didReceiveMemoryWarning
 {
