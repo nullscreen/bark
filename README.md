@@ -2,11 +2,11 @@
   <img src="http://i.imgur.com/fkR8t4g.png" alt="BARK" title="BARK">
 </p>
 
-BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for iOS. Shaking the app pulls up an action sheet, where beta users can instantly send email or create GitHub issues.
+BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for iOS. Shaking the app pulls up an action sheet, where beta users can instantly send email or create GitHub issues - with screenshots automatically attached.
 
 <p align="center">
 <img src="http://i.imgur.com/Tge4KbW.png" alt="action sheet" title="action sheet" width="300" height="564">
-<img src="http://i.imgur.com/iu0iydA.png" alt="issue view" title="issue view" width="300" height="564">
+<img src="http://i.imgur.com/DBLeoeY.png" alt="issue view" title="issue view" width="300" height="564">
 </p>
 ## Get Started ##
 
@@ -14,7 +14,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
 2. Link the following frameworks in the Build Phases tab: 
     - `MessageUI` - to send emails from within the app
     - `SystemConfiguration` -  for network reachability support
-    - `Security` - for secure storage of GitHub credentials.
+    - `Security` - for secure storage of GitHub credentials
     - `MobileCoreServices` - for file MIME type detection on uploaded images 
 4. In your `AppDelegate.h` file,  `#import "SBBark.h"`, and add `<SBBarkDelegate>` to the delegate list.
 5. Set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `bark.repositoryName` to the name of the repository you want to submit issues to.
@@ -86,10 +86,6 @@ BARK can also be shown programmatically anywhere in the application using the `S
 ```objc
 [[SBBark sharedBark] showBark];
 ```
-
-### Coming Soon ###
-
-Submitting images through the GitHub API is currently unsupported. We're planning to build a workaround to make this possible, so you'll soon be able to attach screenshots to GitHub issues as well.
 
 ## Using BARK in Production ##
 
