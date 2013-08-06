@@ -14,7 +14,8 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
 2. Link the following frameworks in the Build Phases tab: 
     - `MessageUI` - to send emails from within the app
     - `SystemConfiguration` -  for network reachability support
-    - `Security` - for secure storage of GitHub credentials. 
+    - `Security` - for secure storage of GitHub credentials.
+    - `MobileCoreServices` - for file MIME type detection on uploaded images 
 4. In your `AppDelegate.h` file,  `#import "SBBark.h"`, and add `<SBBarkDelegate>` to the delegate list.
 5. Set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `bark.repositoryName` to the name of the repository you want to submit issues to.
 

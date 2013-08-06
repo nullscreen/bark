@@ -7,10 +7,14 @@
 //
 
 #import "SBIssueViewController.h"
+
+#import "SBBark.h"
+#import "SBImageAPIClient.h"
+#import "SBWindow.h"
+
 #import "UAGithubEngine.h"
 #import "UICKeyChainStore.h"
-#import "SBWindow.h"
-#import "SBBark.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 #define ASSIGN_BUTTON_TAG 1
@@ -27,13 +31,14 @@
     NSString *selectedAssignee;
     NSNumber *selectedMilestone;
     NSMutableArray *selectedLabels;
+    UISwitch *screenshotSwitch;
 }
 
 @end
 
 @implementation SBIssueViewController
 @synthesize engine = _engine, repository = _repository, issueDictionary = _issueDictionary,
-            labels = _labels, asignees = _asignees, milestones = _milestones, attachDeviceInfo = _attachDeviceInfo;
+            labels = _labels, asignees = _asignees, milestones = _milestones, attachDeviceInfo = _attachDeviceInfo, imageData = _imageData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -135,6 +140,16 @@
     [milestoneButton addTarget:self action:@selector(milestonePressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:milestoneButton];
     
+    UILabel *screenshotLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 35.0f)];
+    screenshotLabel.backgroundColor = [UIColor colorWithRed:(135.0f/255.0f) green:(222.0f/255.0f) blue:(254.0f/255.0f) alpha:1.0f];
+    screenshotLabel.text = @"     Attach Screenshot";
+    screenshotLabel.textColor = [UIColor whiteColor];
+    screenshotLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0f];
+    [self.view addSubview:screenshotLabel];
+    
+    screenshotSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(200.0f, 149.0f, 0.0f, 0.0f)];
+    [self.view addSubview:screenshotSwitch];
+    
     // get app version, build number, ios version
     NSString *iosVersion = [UIDevice currentDevice].systemVersion;
     NSString *iphoneModel = [[SBBark class] machineName];
@@ -142,12 +157,13 @@
     NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     NSString *defaultBody = [NSString stringWithFormat:@"Issue:\n\nExpected Behavior:\n\niOS Version: %@\nModel: %@\nApp Version: %@\nBuild: %@", iosVersion, iphoneModel, appVersion,build];
     
-    bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 145.0f, self.view.frame.size.width, 150.0f)];
+    bodyField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 180.0f, self.view.frame.size.width, 115.0f)];
     bodyField.delegate = self;
     bodyField.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     bodyField.backgroundColor = [UIColor whiteColor];
     bodyField.text = _attachDeviceInfo ? defaultBody : @"Leave a comment...";
     [self.view addSubview:bodyField];
+    
     
     UIButton *createIssueButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [createIssueButton setBackgroundColor:[UIColor colorWithRed:(30.0f/255.0f) green:(30.0f/255.0f) blue:(34.0f/255.0f) alpha:1.0f]];
@@ -175,7 +191,7 @@
 
 - (void)setupLabels
 {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 295.0f, self.view.frame.size.height, self.view.frame.size.height-295.0f-50.0f)];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 295.0f, self.view.frame.size.width, self.view.frame.size.height-295.0f-50.0f)];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.allowsMultipleSelection = YES;
@@ -294,12 +310,6 @@
         return;
     }
     
-    UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    aiView.frame = CGRectMake(72.0f, self.view.frame.size.height-25.0f, 0.0f, 0.0f);
-    aiView.hidesWhenStopped = YES;
-    [self.view addSubview:aiView];
-    
-    [aiView startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         
     if(selectedAssignee) { [_issueDictionary setObject:selectedAssignee forKey:@"assignee"]; }
@@ -308,16 +318,40 @@
     if(selectedLabels.count > 0) { [_issueDictionary setObject:selectedLabels forKey:@"labels"]; }
     
     __weak typeof(self) weakSelf = self;
-    [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
-    [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        [aiView stopAnimating];
-        [button setTitle:@"Success!" forState:UIControlStateNormal];
-        [weakSelf performSelector:@selector(cancelPressed) withObject:nil afterDelay:1.0f];
-    } failure:^(NSError *error) {
-        NSLog(@"error");
-    }];
+    if([screenshotSwitch isOn]) {
+        [button setTitle:@"Uploading screenshot..." forState:UIControlStateNormal];
+        [[SBImageAPIClient sharedClient] uploadImageWithData:_imageData success:^(id JSON) {
+            
+            // append the screenshot in markdown to the body of the text
+            NSString *modifiedBody = [NSString stringWithFormat:@"%@\n![screenshot](%@ \"screenshot\")", bodyField.text, [[JSON objectForKey:@"links"] objectForKey:@"image_link"]];
+            [_issueDictionary setObject:modifiedBody forKey:@"body"];
+            
+            [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
+            [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                [button setTitle:@"Success!" forState:UIControlStateNormal];
+                [weakSelf performSelector:@selector(cancelPressed) withObject:nil afterDelay:1.0f];
+            } failure:^(NSError *error) {
+                NSLog(@"error");
+            }];
+
+        } failure:^(NSError *error) {
+            NSLog(@"%@", error);
+        }];
+    } else {
+        [button setTitle:@"Submitting issue..." forState:UIControlStateNormal];
+        [_engine addIssueForRepository:[_repository objectForKey:@"full_name"] withDictionary:_issueDictionary success:^(id response) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            [button setTitle:@"Success!" forState:UIControlStateNormal];
+            [weakSelf performSelector:@selector(cancelPressed) withObject:nil afterDelay:1.0f];
+        } failure:^(NSError *error) {
+            NSLog(@"error");
+        }];
+    }
 }
+
+
+#pragma mark - Helpers
 
 - (void)didReceiveMemoryWarning
 {
