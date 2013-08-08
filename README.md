@@ -17,7 +17,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     - `Security` - for secure storage of GitHub credentials
     - `MobileCoreServices` - for file MIME type detection on uploaded images 
 4. In your `AppDelegate.h` file,  `#import "SBBark.h"`, and add `<SBBarkDelegate>` to the delegate list.
-5. Set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `bark.repositoryName` to the name of the repository you want to submit issues to.
+5. Take a look at the example `didFinishLaunchingWithOptions` method below. `#import "SBWindow.h"` and copy the provided code. You'll need to set a few variables, like the repository name you want to submit issues to.
 6. [Register for an ImageShack API key](http://imageshack.us/api_request/). As of now, GitHub doesn't allow image uploads directly through their API. Because of this, all uploads are done through the ImageShack API, and then automatically embedded in the markdown when an issue is created.
 
 ```objc
@@ -27,12 +27,10 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
 // an example applicationdidFinishLaunchingWithOptions method
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // create an instance of the SBWindow subclass which will dispatch kSBWindowDidShakeNotification when window shake
+    // start copying here
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    // configure bark
     SBBark *bark = [SBBark sharedBark];
-    bark.repositoryName = @"stagebloc/bark";
+    bark.repositoryName = @"e.g. stagebloc/bark";
     bark.apiKey = @"your_ImageShack_API_key";
     bark.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:kSBWindowDidShakeNotification 
@@ -43,6 +41,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     }];
     
     self.window = window;
+    // stop copying here
     
     // Override point for customization after application launch.
     SBRootViewController *rootViewController = [[SBRootViewController alloc] init];
