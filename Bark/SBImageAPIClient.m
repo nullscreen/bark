@@ -10,9 +10,9 @@
 #import "AFJSONRequestOperation.h"
 
 static NSString * const kImageShackAPIBaseURLString = @"https://post.imageshack.us/";
-static NSString * const kImageShackAPIKey = @"";
 
 @implementation SBImageAPIClient
+@synthesize apiKey = _apiKey;
 
 + (SBImageAPIClient *)sharedClient {
     static SBImageAPIClient *_sharedClient = nil;
@@ -37,7 +37,7 @@ static NSString * const kImageShackAPIKey = @"";
 
 - (void)uploadImageWithData:(NSData*)imageData success:(void (^)(id JSON))success failure:(void (^)(NSError *error))failure
 {
-    NSDictionary *params = @{@"key": kImageShackAPIKey,
+    NSDictionary *params = @{@"key": _apiKey,
                              @"format" : @"json",
                              @"public" : @"no"
                              };

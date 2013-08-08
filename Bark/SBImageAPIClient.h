@@ -10,7 +10,7 @@
 #import "AFHTTPClient.h"
 
 @interface SBImageAPIClient : AFHTTPClient
-
+@property (nonatomic, strong) NSString *apiKey;
 + (SBImageAPIClient *)sharedClient;
 - (void)uploadImageWithData:(NSData*)imageData success:(void (^)(id JSON))success failure:(void (^)(NSError *error))failure;
 @end

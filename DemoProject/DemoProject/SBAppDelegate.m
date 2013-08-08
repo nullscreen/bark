@@ -17,9 +17,10 @@
     // create an instance of the SBWindow subclass which will dispatch kSBWindowDidShakeNotification when window shake
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // configure bart
+    #error Please set your repository name and ImageShack API key
     SBBark *bark = [SBBark sharedBark];
-    bark.repositoryName = @"stagebloc/bark";
+    bark.repositoryName = @"";
+    bark.apiKey = @"";
     bark.delegate = self;
     // hook bark to shake motion
     [[NSNotificationCenter defaultCenter] addObserverForName:kSBWindowDidShakeNotification object:window queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {

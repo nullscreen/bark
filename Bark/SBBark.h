@@ -23,6 +23,7 @@
 @property BOOL attachScreenshot;
 @property (nonatomic, strong) NSString *defaultAssignee;
 @property (nonatomic, strong) NSString *defaultMilestone;
+@property (nonatomic, strong) NSString *apiKey;
 @property BOOL attachDeviceInfo;
 - (void)showBark;
 + (NSString*)machineName;

@@ -152,6 +152,7 @@
 
 - (void)showBark
 {
+    [SBImageAPIClient sharedClient].apiKey = self.apiKey;
     if([self.delegate respondsToSelector:@selector(shouldShowActionSheet)] && [self.delegate shouldShowActionSheet])
         [self presentActionSheet];
 }
