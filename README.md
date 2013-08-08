@@ -18,6 +18,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     - `MobileCoreServices` - for file MIME type detection on uploaded images 
 4. In your `AppDelegate.h` file,  `#import "SBBark.h"`, and add `<SBBarkDelegate>` to the delegate list.
 5. Set `self.window` equal to the SBWindow subclass, as shown below - make sure to set `bark.repositoryName` to the name of the repository you want to submit issues to.
+6. [Register for an ImageShack API key](http://imageshack.us/api_request/). As of now, GitHub doesn't allow image uploads directly through their API. Because of this, all uploads are done through the ImageShack API, and then automatically embedded in the markdown when an issue is created.
 
 ```objc
 #import "SBWindow.h"
@@ -32,6 +33,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
     // configure bark
     SBBark *bark = [SBBark sharedBark];
     bark.repositoryName = @"stagebloc/bark";
+    bark.apiKey = @"your_ImageShack_API_key";
     bark.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:kSBWindowDidShakeNotification 
                                                       object:window 
@@ -64,10 +66,6 @@ Finally, implement the `shouldShowActionSheet` method below. `return YES` to alw
     return YES;
 }
 ```
-
-### Images
-
-As of now, GitHub doesn't allow image uploads directly through their API. Because of this, all uploads are done through the ImageShack API, and then automatically embedded in the markdown when an issue is created. To support image uploads, you need to [register for an ImageShack API key](http://imageshack.us/api_request/), then set it in the `SBAPIClient.m` file.
 
 ## Features ##
 
