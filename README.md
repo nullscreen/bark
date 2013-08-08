@@ -10,7 +10,7 @@ BARK (Better App Reporting Kit) is a simple, in-app issue reporting library for 
 </p>
 ## Get Started ##
 
-1. Add BARK to your Podfile `pod 'Bark', '~> 0.2'` or clone the repository with `git clone git@github.com:stagebloc/bark.git` 
+1. Clone the repository with `git clone git@github.com:stagebloc/bark.git` or add BARK to your Podfile: `pod 'Bark', '~> 0.3'`
 2. Link the following frameworks in the Build Phases tab: 
     - `MessageUI` - to send emails from within the app
     - `SystemConfiguration` -  for network reachability support
@@ -64,6 +64,10 @@ Finally, implement the `shouldShowActionSheet` method below. `return YES` to alw
     return YES;
 }
 ```
+
+### Images
+
+As of now, GitHub doesn't allow image uploads directly through their API. Because of this, all uploads are done through the ImageShack API, and then automatically embedded in the markdown when an issue is created. To support image uploads, you need to [register for an ImageShack API key](http://imageshack.us/api_request/), then set it in the `SBAPIClient.m` file.
 
 ## Features ##
 
