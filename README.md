@@ -65,6 +65,10 @@ Finally, implement the `shouldShowActionSheet` method below. `return YES` to alw
 }
 ```
 
+### Images
+
+As of now, GitHub doesn't allow image uploads directly through their API. Because of this, all uploads are done through the ImageShack API, and then automatically embedded in the markdown when an issue is created. To support image uploads, you need to [register for an ImageShack API key](http://imageshack.us/api_request/), then set it in the `SBAPIClient.m` file.
+
 ## Features ##
 
 BARK comes with a set of features to make quick adjustments. You can set these below `repositoryName` on the `bark` object.
