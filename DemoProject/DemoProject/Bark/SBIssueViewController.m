@@ -148,6 +148,7 @@
     [self.view addSubview:screenshotLabel];
     
     screenshotSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(200.0f, 149.0f, 0.0f, 0.0f)];
+    [screenshotSwitch addTarget:self action:@selector(switchFlipped) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:screenshotSwitch];
     
     // get app version, build number, ios version
@@ -284,6 +285,17 @@
 - (void)cancelPressed
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)switchFlipped
+{
+    if([screenshotSwitch isOn]) {
+        if(![SBImageAPIClient sharedClient].apiKey || [[SBImageAPIClient sharedClient].apiKey isEqualToString:@""]) {
+            [screenshotSwitch setOn:NO animated:YES];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Upload Unsupported" message:@"You must set an ImageShack API key to upload images. Contact your iOS developer for assistance" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alertView show];
+        }
+    }
 }
 
 - (void)logoutPressed

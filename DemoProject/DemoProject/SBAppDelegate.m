@@ -17,9 +17,9 @@
     // create an instance of the SBWindow subclass which will dispatch kSBWindowDidShakeNotification when window shake
     SBWindow *window = [[SBWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    #error Please set your repository name and ImageShack API key
+    #error Please set your repository name and ImageShack API Key, then delete this line -- note the API key is optional, but required to upload images to GitHub
     SBBark *bark = [SBBark sharedBark];
-    bark.repositoryName = @"";
+    bark.repositoryName = @"stagebloc/bark";
     bark.apiKey = @"";
     bark.delegate = self;
     // hook bark to shake motion
